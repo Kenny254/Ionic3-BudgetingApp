@@ -14,9 +14,9 @@
       <div [hidden]="!myParam">
         <h5>Parameters passed:</h5>
     
-        <p style="background-color: #f8f8f8">selections: [
-      {{myParam}}
-    ]</p>
+        <p>
+     Account Type: {{myParam}}
+    </p>
     
       </div>
       <div [hidden]="myParam">
@@ -34,7 +34,7 @@
             <ion-input [(ngModel)]="accountBalance" type="number" placeholder="50.00">
             </ion-input>
           </ion-item>
-        <button ion-button block (click)=" createAccount(accountName, accountBalance);">
+        <button ion-button block (click)=" createAccount(myParam,accountName, accountBalance);">
             Add
           </button>
 

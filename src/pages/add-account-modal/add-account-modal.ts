@@ -1,12 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import {BudgetProvider} from '../../providers/budget/budget';
-/**
- * Generated class for the AddAccountModalPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -15,21 +9,22 @@ import {BudgetProvider} from '../../providers/budget/budget';
 })
 export class AddAccountModalPage {
   myParam: string;
-  
     constructor(
       public viewCtrl: ViewController,
       params: NavParams,
       public budgetProvider: BudgetProvider
     ) {
+      //constructor
       this.myParam = params.get('myParam');
     }
-    createAccount(accountName: string, accountBalance: number)
+    //push a new account to users node
+    createAccount(accountType:string, accountName: string, accountBalance: number, )
     {
-      this.budgetProvider.createAccount(accountName, accountBalance);
+      this.budgetProvider.createAccount(accountType,accountName, accountBalance);
       this.dismiss();
     }
 
-
+    //close modal
     dismiss() {
       this.viewCtrl.dismiss();
     }

@@ -24,7 +24,7 @@ export class BudgetProvider {
     });
   }//end of constructor
 
-  createAccount(accountName:string, accountBalance: number): firebase.Promise<any> 
+  createAccount(accountType:string,accountName:string, accountBalance: number): firebase.Promise<any> 
   {
     //console logging changes in firebase
     this.userProfileRef.on("value", function(snapshot) 
@@ -37,6 +37,7 @@ export class BudgetProvider {
 
       //the actual push to firebase
       this.userProfileRef.child('accounts').push({
+        Account_Type: accountType,
         Accountname: accountName,
         Accountbalance: accountBalance
       

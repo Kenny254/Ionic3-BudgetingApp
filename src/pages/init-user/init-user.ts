@@ -15,14 +15,17 @@ export class InitUserPage {
   public budgetProvider: BudgetProvider) {
     //constructor
   }
-  createAccount(accountName: string, accountBalance: number)
+  
+  createAccount(accountType:string,accountName: string, accountBalance: number)
   {
-    this.budgetProvider.createAccount(accountName, accountBalance);
+    this.budgetProvider.createAccount(accountType,accountName, accountBalance);
   }
+
   openModalWithParams() {
     let myModal = this.modalCtrl.create('AddAccountModalPage', { 'myParam': this.myParam });
     myModal.present();
   }
+
   gotoinitCategories(){
     this.navCtrl.setRoot('InitCategoriesPage')
   }
