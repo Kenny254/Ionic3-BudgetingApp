@@ -15,6 +15,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireModule } from 'angularfire2';
 //Our Providers
 import { BudgetProvider } from '../providers/budget/budget';
+import { AuthProvider } from '../providers/auth/auth';
 @NgModule({
   declarations: [
     MyApp,
@@ -40,7 +41,8 @@ import { BudgetProvider } from '../providers/budget/budget';
     //af2
     AngularFireAuth,
     //ourproviders
-    BudgetProvider
+    BudgetProvider,
+    AuthProvider,
   ]
 })
 export class AppModule {}
