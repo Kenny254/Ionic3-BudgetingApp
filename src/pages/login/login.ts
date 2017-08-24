@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { usercreds } from '../../models/interfaces/usercreds';
 import { AuthProvider } from '../../providers/auth/auth';
-
+import {HomePage} from '../home/home';
 @IonicPage()
 @Component({
   selector: 'page-login',
@@ -20,7 +20,7 @@ export class LoginPage {
   signin() {
     this.authservice.login(this.credentials).then((res: any) => {
       if (!res.code)
-        this.navCtrl.setRoot('HomePage');
+        this.navCtrl.setRoot(HomePage);
       else
         alert(res);
     })
