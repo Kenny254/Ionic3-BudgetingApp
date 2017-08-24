@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { AngularFireAuth } from 'angularfire2/auth';
+import firebase from 'firebase';
 import 'rxjs/add/operator/map';
 
 /*
@@ -10,9 +11,42 @@ import 'rxjs/add/operator/map';
 */
 @Injectable()
 export class BudgetProvider {
+  public UID: string;
+  userProfileRef: firebase.database.Reference;
+  firedata = firebase.database().ref('/users');
+  constructor(public afireauth: AngularFireAuth) {
+    //grab uid and link it up
+    firebase.auth().onAuthStateChanged( user => {
+      if (user) {
+        this.UID = user.uid;
+        this.userProfileRef = firebase.database().ref(`users/${user.uid}`);
+      }
+    });
+  }//end of constructor
 
-  constructor(public http: Http) {
-    console.log('Hello BudgetProvider Provider');
+  createAccount(accountName:string, accountBalance: number): firebase.Promise<any> 
+  {
+    //console logging changes in firebase
+    this.userProfileRef.on("value", function(snapshot) 
+      {
+        console.log("userProfileRef log" + snapshot.val());
+      },  function (errorObject) 
+        {
+          console.log("The read failed: " + errorObject.code);
+        });
+
+      //the actual push to firebase
+      this.userProfileRef.child('accounts').push({
+        Accountname: accountName,
+        Accountbalance: accountBalance
+      
+    })
+         
+    
+  return 
   }
+
+
+
 
 }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,LoadingController, ToastController } from 'ionic-angular';
+//user provider for account manipluation
 import { UserProvider } from '../../providers/user/user'
 import {HomePage} from '../home/home';
 @IonicPage()
@@ -43,7 +44,7 @@ export class SignUpPage {
       this.userservice.adduser(this.newuser).then((res: any) => {
         loader.dismiss();
         if (res.success)
-          this.navCtrl.push(HomePage);
+          this.navCtrl.push('InitUserPage');
         else
           alert('Error' + res);
       })

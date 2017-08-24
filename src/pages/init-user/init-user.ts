@@ -1,12 +1,8 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-/**
- * Generated class for the InitUserPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
+import { Component } from '@angular/core';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import {BudgetProvider} from '../../providers/budget/budget';
+import {AddAccountModalPage } from '../add-account-modal/add-account-modal';
 
 @IonicPage()
 @Component({
@@ -14,12 +10,20 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'init-user.html',
 })
 export class InitUserPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  myParam = '';
+  constructor(public navCtrl: NavController, public navParams: NavParams,public modalCtrl: ModalController,
+  public budgetProvider: BudgetProvider) {
+    //constructor
   }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad InitUserPage');
+  createAccount(accountName: string, accountBalance: number)
+  {
+    this.budgetProvider.createAccount(accountName, accountBalance);
   }
-
+  openModalWithParams() {
+    let myModal = this.modalCtrl.create('AddAccountModalPage', { 'myParam': this.myParam });
+    myModal.present();
+  }
+  gotoinitCategories(){
+    this.navCtrl.setRoot('InitCategoriesPage')
+  }
 }
