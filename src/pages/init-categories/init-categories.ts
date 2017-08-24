@@ -1,25 +1,32 @@
+
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the InitCategoriesPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
-
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import {BudgetProvider} from '../../providers/budget/budget';
+import {AddAccountModalPage } from '../add-account-modal/add-account-modal';
+import {HomePage} from '../home/home';
 @IonicPage()
 @Component({
   selector: 'page-init-categories',
   templateUrl: 'init-categories.html',
 })
 export class InitCategoriesPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  myParam = '';
+  constructor(public navCtrl: NavController, public navParams: NavParams,public modalCtrl: ModalController,
+  public budgetProvider: BudgetProvider) {
+    //constructor
+  }
+  
+  createCategory(categoryName: string)
+  {
+    this.budgetProvider.createCategory(categoryName);
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad InitCategoriesPage');
+  openModalWithParams() {
+    let myModal = this.modalCtrl.create('AddCategoryModalPage');
+    myModal.present();
   }
 
+  gotoinitCategories(){
+    this.navCtrl.setRoot(HomePage)
+  }
 }
