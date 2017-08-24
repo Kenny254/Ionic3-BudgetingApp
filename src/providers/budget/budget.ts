@@ -47,6 +47,27 @@ export class BudgetProvider {
   return 
   }
 
+  createCategory(categoryName:string,): firebase.Promise<any> 
+  {
+    //console logging changes in firebase
+    this.userProfileRef.on("value", function(snapshot) 
+      {
+        console.log("userProfileRef log" + snapshot.val());
+      },  function (errorObject) 
+        {
+          console.log("The read failed: " + errorObject.code);
+        });
+
+      //the actual push to firebase
+      this.userProfileRef.child('accounts').push({
+      CategoryName: categoryName
+      
+    })
+         
+    
+  return 
+  }
+
 
 
 
