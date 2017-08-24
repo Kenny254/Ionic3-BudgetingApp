@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,LoadingController, ToastController } from 'ionic-angular';
 import { UserProvider } from '../../providers/user/user'
-
+import {HomePage} from '../home/home';
 @IonicPage()
 @Component({
   selector: 'page-sign-up',
@@ -43,7 +43,7 @@ export class SignUpPage {
       this.userservice.adduser(this.newuser).then((res: any) => {
         loader.dismiss();
         if (res.success)
-          this.navCtrl.push('HomePage');
+          this.navCtrl.push(HomePage);
         else
           alert('Error' + res);
       })
