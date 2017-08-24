@@ -59,7 +59,7 @@ export class BudgetProvider {
         });
 
       //the actual push to firebase
-      this.userProfileRef.child('accounts').push({
+      this.userProfileRef.child('categories').push({
       CategoryName: categoryName
       
     })
