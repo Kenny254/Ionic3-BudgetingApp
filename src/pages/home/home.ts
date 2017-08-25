@@ -37,6 +37,7 @@ export class HomePage {
             id: snap.key,
          
             Name: snap.val().CategoryName,
+            Balance: snap.val().CategoryBalance
        
           });
           console.log(this.categoryList);

@@ -47,7 +47,7 @@ export class BudgetProvider {
   return 
   }
 
-  createCategory(categoryName:string,): firebase.Promise<any> 
+  createCategory(categoryName:string, categoryBalance: number): firebase.Promise<any> 
   {
     //console logging changes in firebase
     this.userProfileRef.on("value", function(snapshot) 
@@ -60,7 +60,8 @@ export class BudgetProvider {
 
       //the actual push to firebase
       this.userProfileRef.child('categories').push({
-      CategoryName: categoryName
+      CategoryName: categoryName,
+      CategoryBalance: categoryBalance
       
     })
          

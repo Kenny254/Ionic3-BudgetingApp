@@ -18,8 +18,13 @@
           <ion-input [(ngModel)]="categoryName" type="text" placeholder="Ex-Groceries">
           </ion-input>
         </ion-item>
+          <ion-item>
+          <ion-label>Category Balance</ion-label>
+          <ion-input [(ngModel)]="categoryBalance" type="number" placeholder="50.00">
+          </ion-input>
+        </ion-item>
        
-        <button ion-button block (click)=" createCategory(categoryName);">
+        <button ion-button block (click)=" createCategory(categoryName, categoryBalance);">
             Add
           </button>
     </ion-content>

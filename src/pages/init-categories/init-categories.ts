@@ -16,9 +16,9 @@ export class InitCategoriesPage {
     //constructor
   }
   
-  createCategory(categoryName: string)
+  createCategory(categoryName: string, categoryBalance: number)
   {
-    this.budgetProvider.createCategory(categoryName);
+    this.budgetProvider.createCategory(categoryName, categoryBalance);
   }
 
   openModalWithParams() {
