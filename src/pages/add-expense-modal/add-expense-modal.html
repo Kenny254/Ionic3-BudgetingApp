@@ -13,6 +13,28 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content >
+    <ion-item>
+        <ion-label>Account</ion-label>
+        <ion-select [(ngModel)]="Account" >
+          <ion-option value="{{account.id}}" *ngFor="let account of accountList">{{account.Name}}</ion-option>
+         
+        </ion-select>
+      </ion-item>
 
+      <ion-item>
+          <ion-label>Category</ion-label>
+          <ion-select [(ngModel)]="Category" >
+            <ion-option value="{{category.id}}" *ngFor="let category of categoryList">{{category.Name}}</ion-option>
+           
+          </ion-select>
+        </ion-item>
+        
+        <ion-item>
+            <ion-input [(ngModel)]="expenseAmount" type="number" placeholder="How Much?"></ion-input>
+          </ion-item>
+
+          <button ion-button block (click)=" addExpense(Account,Account, Category, Category, expenseAmount);">
+              Add Expense
+            </button>
 </ion-content>

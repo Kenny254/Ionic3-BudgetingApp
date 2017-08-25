@@ -23,11 +23,11 @@
 </ion-item>
   
  <h1>Expenses (list of recent)</h1>
- <ion-list>
-    <ion-item>charge1</ion-item>
-    <ion-item>charge2</ion-item>
-    <ion-item>charge3</ion-item>
-    <ion-item>charge4</ion-item>
-    <ion-item>charge5</ion-item>
-  </ion-list>
+ <ion-item *ngFor="let expense of expenseList" >  
+        <p>{{expense.AccountName}}</p> 
+        <p>{{expense.CategoryName}}</p> 
+        <p>{{expense.amount}}</p>
+    </ion-item>
+
+  <button ion-button (click)="openExpenseModal()">Add Expense</button>
 </ion-content>
