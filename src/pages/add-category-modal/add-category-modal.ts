@@ -18,9 +18,9 @@ export class AddCategoryModalPage {
       this.myParam = params.get('myParam');
     }
     //push a new account to users node
-    createCategory(categoryName:string )
+    createCategory(categoryName:string, categoryBalance: number)
     {
-      this.budgetProvider.createCategory(categoryName);
+      this.budgetProvider.createCategory(categoryName, categoryBalance);
       this.dismiss();
     }
 
