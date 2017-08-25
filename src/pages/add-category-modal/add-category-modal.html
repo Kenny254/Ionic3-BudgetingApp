@@ -1,0 +1,25 @@
+<ion-header>
+    
+      <ion-navbar>
+        <ion-buttons start>
+          <button ion-button (click)="dismiss()">Close</button>
+        </ion-buttons>
+        <ion-title>Modals</ion-title>
+      </ion-navbar>
+    
+    </ion-header>
+    
+    
+    <ion-content padding>
+  
+      
+      <ion-item>
+          <ion-label>Category Name</ion-label>
+          <ion-input [(ngModel)]="categoryName" type="text" placeholder="Ex-Groceries">
+          </ion-input>
+        </ion-item>
+       
+        <button ion-button block (click)=" createCategory(categoryName);">
+            Add
+          </button>
+    </ion-content>

@@ -3,30 +3,30 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import {BudgetProvider} from '../../providers/budget/budget';
 import {AddAccountModalPage } from '../add-account-modal/add-account-modal';
-
+import {HomePage} from '../home/home';
 @IonicPage()
 @Component({
-  selector: 'page-init-user',
-  templateUrl: 'init-user.html',
+  selector: 'page-init-categories',
+  templateUrl: 'init-categories.html',
 })
-export class InitUserPage {
+export class InitCategoriesPage {
   myParam = '';
   constructor(public navCtrl: NavController, public navParams: NavParams,public modalCtrl: ModalController,
   public budgetProvider: BudgetProvider) {
     //constructor
   }
   
-  createAccount(accountType:string,accountName: string, accountBalance: number)
+  createCategory(categoryName: string)
   {
-    this.budgetProvider.createAccount(accountType,accountName, accountBalance);
+    this.budgetProvider.createCategory(categoryName);
   }
 
   openModalWithParams() {
-    let myModal = this.modalCtrl.create('AddAccountModalPage', { 'myParam': this.myParam });
+    let myModal = this.modalCtrl.create('AddCategoryModalPage');
     myModal.present();
   }
 
   gotoinitCategories(){
-    this.navCtrl.setRoot('InitCategoriesPage')
+    this.navCtrl.setRoot(HomePage)
   }
 }

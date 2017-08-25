@@ -5,11 +5,11 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class UserProvider {
-  firedata = firebase.database().ref('/chatusers');
+  firedata = firebase.database().ref('/users');
   constructor(public afireauth: AngularFireAuth) {
-    console.log('Hello UserProvider Provider');
+    
   }
-
+  //create user with email/pass/nickname
   adduser(newuser) {
     var promise = new Promise((resolve, reject) => {
       this.afireauth.auth.createUserWithEmailAndPassword(newuser.email, newuser.password).then(() => {
@@ -22,6 +22,7 @@ export class UserProvider {
             displayName: newuser.displayName,
             photoURL: 'give a dummy placeholder url here'
           }).then(() => {
+            console.log('succesfully stored user variables')
             resolve({ success: true });
             }).catch((err) => {
               reject(err);

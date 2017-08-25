@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 /**
- * Generated class for the AddExpensePage page.
+ * Generated class for the AddExpenseModalPage page.
  *
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
@@ -10,16 +10,16 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-add-expense',
-  templateUrl: 'add-expense.html',
+  selector: 'page-add-expense-modal',
+  templateUrl: 'add-expense-modal.html',
 })
-export class AddExpensePage {
+export class AddExpenseModalPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AddExpensePage');
+    console.log('ionViewDidLoad AddExpenseModalPage');
   }
 
 }

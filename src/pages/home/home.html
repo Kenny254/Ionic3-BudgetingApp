@@ -7,64 +7,27 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content >
  <h1>Balances</h1>
- <ion-card>
- <p>AccountName:</p>
- <br/>
- <p>Balance:</p>
-</ion-card>
-<ion-card>
-    <p>AccountName:</p>
-    <br/>
-    <p>Balance:</p>
-</ion-card>
-<ion-card>
-    <p>AccountName:</p>
-    <br/>
-    <p>Balance:</p>
-</ion-card>
+ <ion-item *ngFor="let account of accountList" style="width:100%">
+    <h1>{{account.Name}}</h1>
+    <p>{{account.Type}}</p>
+    <p>
+        <strong>{{account.Balance}}</strong>
+    </p>
+</ion-item>
 
 <h1>Categories</h1>
- <ion-list>
-    <ion-card>Category:
-      <br>
-      Amount Spent:
-      <br>
-      Amount Left:
-    </ion-card>
-    <ion-card>Category:
-        <br>
-        Amount Spent:
-        <br>
-        Amount Left:
-    </ion-card>
-    <ion-card>Category:
-        <br>
-        Amount Spent:
-        <br>
-        Amount Left:
-    </ion-card>
-    <ion-card>Category:
-        <br>
-        Amount Spent:
-        <br>
-        Amount Left:
-    </ion-card>
-    <ion-card>Category:
-        <br>
-        Amount Spent:
-        <br>
-        Amount Left:
-    </ion-card>
-  </ion-list>
+<ion-item *ngFor="let category of categoryList" >  
+    <h1>{{category.Name}}</h1> 
+</ion-item>
   
  <h1>Expenses (list of recent)</h1>
  <ion-list>
-    <ion-card>charge1</ion-card>
-    <ion-card>charge2</ion-card>
-    <ion-card>charge3</ion-card>
-    <ion-card>charge4</ion-card>
-    <ion-card>charge5</ion-card>
+    <ion-item>charge1</ion-item>
+    <ion-item>charge2</ion-item>
+    <ion-item>charge3</ion-item>
+    <ion-item>charge4</ion-item>
+    <ion-item>charge5</ion-item>
   </ion-list>
 </ion-content>
