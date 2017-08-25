@@ -24,7 +24,7 @@
 </ion-item>
   
  <h1>Expenses (list of recent)</h1>
- <ion-item *ngFor="let expense of expenseList;let i=index" *ngIf="i<3">  
+ <ion-item *ngFor="let expense of expenseList;let i=index" >  
  
         <p *ngIf="i<3">{{expense.AccountName}}</p> 
         <p *ngIf="i<3">{{expense.CategoryName}}</p> 
