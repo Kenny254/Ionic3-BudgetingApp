@@ -1,6 +1,6 @@
 import { BudgetProvider } from './../../providers/budget/budget';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, ModalController } from 'ionic-angular';
 import { UserProvider } from '../../providers/user/user';
 
 @Component({
@@ -10,7 +10,8 @@ import { UserProvider } from '../../providers/user/user';
 export class HomePage {
   public accountList: Array<any>;
   public categoryList: Array<any>;
-  constructor(public navCtrl: NavController, public budgetProvider:BudgetProvider) {
+  public expenseList: Array<any>;
+  constructor(public modalCtrl: ModalController,public navCtrl: NavController, public budgetProvider:BudgetProvider) {
 
   }
   ionViewDidEnter() 
@@ -37,15 +38,35 @@ export class HomePage {
             id: snap.key,
          
             Name: snap.val().CategoryName,
-            Balance: snap.val().CategoryBalance
+
+            Balance: snap.val().CategoryBalance,
+
        
           });
           console.log(this.categoryList);
           return false
         });
         });
+        this.budgetProvider.getExpenses().on('value', snapshot => {
+          this.expenseList = [];
+          snapshot.forEach( snap => {
+            this.expenseList.push({
+              id: snap.key,
+           
+              AccountName: snap.val().AccountName,
+              CategoryName: snap.val().CategoryName,
+              amount: snap.val().amount
+         
+            });
+            console.log(this.expenseList);
+            return false
+          });
+          });
   
   }
-
+  openExpenseModal() {
+    let myModal = this.modalCtrl.create('AddExpenseModalPage');
+    myModal.present();
+  }
 
 }

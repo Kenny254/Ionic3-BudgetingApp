@@ -19,16 +19,20 @@
 
 <h1>Categories</h1>
 <ion-item *ngFor="let category of categoryList" >  
-    <h1>{{category.Name}}</h1>
-    <p>{{category.Balance}}</p> 
+
+    <h1>{{category.Name}}</h1> 
+    <h1>{{category.Balance}}</h1> 
+
 </ion-item>
   
  <h1>Expenses (list of recent)</h1>
- <ion-list>
-    <ion-item>charge1</ion-item>
-    <ion-item>charge2</ion-item>
-    <ion-item>charge3</ion-item>
-    <ion-item>charge4</ion-item>
-    <ion-item>charge5</ion-item>
-  </ion-list>
+ <ion-item *ngFor="let expense of expenseList;let i=index" >  
+ 
+        <p *ngIf="i<3">{{expense.AccountName}}</p> 
+        <p *ngIf="i<3">{{expense.CategoryName}}</p> 
+        <p *ngIf="i<3">{{expense.amount}}</p>
+  
+    </ion-item>
+
+  <button ion-button (click)="openExpenseModal()">Add Expense</button>
 </ion-content>

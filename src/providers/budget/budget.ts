@@ -69,12 +69,46 @@ export class BudgetProvider {
   return 
   }
 
+  addExpense(accountName:string, accountID, categoryName:string, categoryID:string, amount:number){
+    
+     //console logging changes in firebase
+     this.userProfileRef.on("value", function(snapshot) 
+     {
+       console.log("userProfileRef log" + snapshot.val());
+     },  function (errorObject) 
+       {
+         console.log("The read failed: " + errorObject.code);
+       });
+
+     //the actual push to firebase
+     this.userProfileRef.child('expenses').push({
+       AccountName: accountName,
+     CategoryName: categoryName,
+     amount: amount
+     
+   })
+   this.userProfileRef.child('accounts').child(accountID).child(`/Accountbalance`).transaction(function(currentbalance) {
+    
+    return currentbalance -= amount;
+  });     
+  this.userProfileRef.child('categories').child(categoryID).child(`/CategoryBalance`).transaction(function(currentbalance) {
+    
+    return currentbalance -= amount;
+  }); 
+   
+ return 
+  }
+
   getAccounts(): firebase.database.Reference {
     return this.userProfileRef.child("/accounts");
   }
 
   getCategories(): firebase.database.Reference {
     return this.userProfileRef.child("/categories");
+  }
+
+  getExpenses(): firebase.database.Reference {
+    return this.userProfileRef.child("/expenses");
   }
 
 
