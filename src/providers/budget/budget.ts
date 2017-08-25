@@ -68,6 +68,14 @@ export class BudgetProvider {
   return 
   }
 
+  getAccounts(): firebase.database.Reference {
+    return this.userProfileRef.child("/accounts");
+  }
+
+  getCategories(): firebase.database.Reference {
+    return this.userProfileRef.child("/categories");
+  }
+
 
 
 
