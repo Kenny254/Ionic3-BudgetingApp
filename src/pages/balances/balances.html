@@ -10,30 +10,19 @@
       <button ion-button menuToggle>
           <ion-icon name="menu"></ion-icon>
         </button>
-    <ion-title>Balances</ion-title>
+    <ion-title>Accounts</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-<h1>Accounts</h1>
-<ion-list>
-  <ion-item>Accountname:
-    <br/>
-            Balance:
-  </ion-item>
-  <ion-item>Accountname:
-      <br/>
-            Balance:
-</ion-item>
-<ion-item>Accountname:
-    <br/>
-          Balance:
-</ion-item>
-<ion-item>Accountname:
-    <br/>
-          Balance:
-</ion-item>
-</ion-list>
+  <h1>Balances</h1>
+    <ion-item *ngFor="let account of accountList" style="width:100%">
+       <h1>{{account.Name}}</h1>
+       <p>{{account.Type}}</p>
+       <p>
+           <strong>{{account.Balance}}</strong>
+       </p>
+   </ion-item>
 </ion-content>
