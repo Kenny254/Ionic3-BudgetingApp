@@ -44,7 +44,7 @@ export class SignUpPage {
       this.userservice.adduser(this.newuser).then((res: any) => {
         loader.dismiss();
         if (res.success)
-          this.navCtrl.push('InitUserPage');
+          this.navCtrl.push('AddUserInfoPage');
         else
           alert('Error' + res);
       })
