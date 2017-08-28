@@ -7,4 +7,5 @@
 npm install
 npm install firebase
 npm install angularfire2
+npm install chart.js --save
 ```
