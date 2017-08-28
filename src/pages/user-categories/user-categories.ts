@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { BudgetProvider } from './../../providers/budget/budget';
 import { Chart } from 'chart.js';
+
 /**
  * Generated class for the UserCategoriesPage page.
  *
@@ -22,8 +23,12 @@ export class UserCategoriesPage {
   doughnutChart: any;
   lineChart: any;
   categoryList: Array<any>;
+  categoryBalance: Array<number>;
+
+ 
   constructor(public navCtrl: NavController, public navParams: NavParams, public budgetProvider: BudgetProvider) {
   }
+  
 
   ionViewDidEnter() {
    
@@ -43,19 +48,23 @@ export class UserCategoriesPage {
         return false
       });
       });
+      //now balances
+     this.categoryBalance = this.categoryList.map(Number);
+     console.log('CATEGORY BALANCE:' + this.categoryBalance); //currently spitting NaN
   }
   //charts
   //example charts for now 
   ionViewDidLoad(){
   
-  this.barChart = new Chart(this.barCanvas.nativeElement, {
+ 
+ this.barChart = new Chart(this.barCanvas.nativeElement, {
     
                type: 'bar',
                data: {
                    labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
                    datasets: [{
                        label: '# of Votes',
-                       data: [12, 19, 3, 5, 2, 3],
+                       data:this.categoryBalance,
                        backgroundColor: [
                            'rgba(255, 99, 132, 0.2)',
                            'rgba(54, 162, 235, 0.2)',
