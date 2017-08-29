@@ -23,8 +23,8 @@ export class UserCategoriesPage {
   doughnutChart: any;
   lineChart: any;
   categoryList: Array<any>;
-  categoryBalance: Array<number>;
-
+  categoryBalance: Array<any>;
+  finalNumberArray;
  
   constructor(public navCtrl: NavController, public navParams: NavParams, public budgetProvider: BudgetProvider) {
   }
@@ -32,7 +32,14 @@ export class UserCategoriesPage {
 
   ionViewDidEnter() {
    
-    this.budgetProvider.getCategories().on('value', snapshot => {
+   
+  
+  }
+  //charts
+  //example charts for now 
+  ionViewDidLoad(){
+  
+  this.budgetProvider.getCategories().on('value', snapshot => {
       this.categoryList = [];
       snapshot.forEach( snap => {
         this.categoryList.push({
@@ -44,27 +51,43 @@ export class UserCategoriesPage {
 
      
         });
+        console.log('categorylist follows');
         console.log(this.categoryList);
         return false
       });
       });
       //now balances
-     this.categoryBalance = this.categoryList.map(Number);
-     console.log('CATEGORY BALANCE:' + this.categoryBalance); //currently spitting NaN
-  }
-  //charts
-  //example charts for now 
-  ionViewDidLoad(){
+      this.budgetProvider.getCategories().on('value', snapshot => {
+        this.categoryBalance = [];
+        snapshot.forEach( snap => {
+          this.categoryBalance.push({
+            id: snap.key,
+         
+            Name: snap.val().CategoryName,
   
- 
+            Balance: snap.val().CategoryBalance,
+  
+       
+          });
+          console.log('categoryBalance follows');
+          console.log( this.categoryBalance);
+         this.finalNumberArray = this.categoryBalance.map(function (obj) {
+            return Number(obj.Balance);
+          });
+          console.log('array number convert check follows')
+          console.log(this.finalNumberArray);
+          return false
+        });
+        });
+   //this.categoryBalance.map(Number);
  this.barChart = new Chart(this.barCanvas.nativeElement, {
     
                type: 'bar',
                data: {
-                   labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                   labels: ['1','2','1','2','1','2'],
                    datasets: [{
-                       label: '# of Votes',
-                       data:this.categoryBalance,
+                       label: '# of ids',
+                       data: this.finalNumberArray,
                        backgroundColor: [
                            'rgba(255, 99, 132, 0.2)',
                            'rgba(54, 162, 235, 0.2)',
@@ -100,10 +123,10 @@ export class UserCategoriesPage {
     
                type: 'doughnut',
                data: {
-                   labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                   labels: ["Red", "Blue", ],
                    datasets: [{
-                       label: '# of Votes',
-                       data: [12, 19, 3, 5, 2, 3],
+                       label: '# of ids',
+                       data: this.finalNumberArray,
                        backgroundColor: [
                            'rgba(255, 99, 132, 0.2)',
                            'rgba(54, 162, 235, 0.2)',
@@ -150,7 +173,7 @@ export class UserCategoriesPage {
                            pointHoverBorderWidth: 2,
                            pointRadius: 1,
                            pointHitRadius: 10,
-                           data: [65, 59, 80, 81, 56, 55, 40],
+                           data: this.finalNumberArray,
                            spanGaps: false,
                        }
                    ]
