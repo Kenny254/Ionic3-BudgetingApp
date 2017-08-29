@@ -25,7 +25,7 @@ export class UserCategoriesPage {
   categoryList: Array<any>;
   categoryBalance: Array<any>;
   finalNumberArray;
- 
+  finalNameArray;
   constructor(public navCtrl: NavController, public navParams: NavParams, public budgetProvider: BudgetProvider) {
   }
   
@@ -53,6 +53,17 @@ export class UserCategoriesPage {
         });
         console.log('categorylist follows');
         console.log(this.categoryList);
+        this.finalNameArray = this.categoryList.map(function (obj) {
+            return obj.Name;
+            
+          });
+          this.finalNumberArray = this.categoryList.map(function (obj) {
+            return Number(obj.Balance);
+          });
+          console.log('array name convert check follows')
+          console.log(this.finalNameArray);
+          console.log('array number convert check follows')
+          console.log(this.finalNumberArray);
         return false
       });
       });
@@ -71,11 +82,7 @@ export class UserCategoriesPage {
           });
           console.log('categoryBalance follows');
           console.log( this.categoryBalance);
-         this.finalNumberArray = this.categoryBalance.map(function (obj) {
-            return Number(obj.Balance);
-          });
-          console.log('array number convert check follows')
-          console.log(this.finalNumberArray);
+     
           return false
         });
         });
@@ -84,9 +91,9 @@ export class UserCategoriesPage {
     
                type: 'bar',
                data: {
-                   labels: ['1','2','1','2','1','2'],
+                   labels: this.finalNameArray,
                    datasets: [{
-                       label: '# of ids',
+                       label: 'Category Spending Chart',
                        data: this.finalNumberArray,
                        backgroundColor: [
                            'rgba(255, 99, 132, 0.2)',
@@ -123,9 +130,9 @@ export class UserCategoriesPage {
     
                type: 'doughnut',
                data: {
-                   labels: ["Red", "Blue", ],
+                   labels: this.finalNameArray,
                    datasets: [{
-                       label: '# of ids',
+                       label: 'Spending Chart 2',
                        data: this.finalNumberArray,
                        backgroundColor: [
                            'rgba(255, 99, 132, 0.2)',
@@ -152,10 +159,10 @@ export class UserCategoriesPage {
     
                type: 'line',
                data: {
-                   labels: ["January", "February", "March", "April", "May", "June", "July"],
+                   labels:this.finalNameArray,
                    datasets: [
                        {
-                           label: "My First dataset",
+                           label: "TODO-Dates from Expenses",
                            fill: false,
                            lineTension: 0.1,
                            backgroundColor: "rgba(75,192,192,0.4)",

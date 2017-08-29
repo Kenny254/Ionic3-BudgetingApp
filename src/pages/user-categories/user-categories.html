@@ -13,34 +13,28 @@
 
 <ion-content >
     <h1>Categories</h1>
-    <ion-item *ngFor="let category of categoryList" >  
+    <!-- <ion-item *ngFor="let category of categoryList" >  
     
         <h1>{{category.Name}}</h1> 
         <h1>{{category.Balance}}</h1> 
     
-    </ion-item>
+    </ion-item> -->
     <ion-card>
-        <ion-card-header>
-          Bar Chart
-        </ion-card-header>
+        
         <ion-card-content>
           <canvas #barCanvas></canvas>
         </ion-card-content>
       </ion-card>
    
       <ion-card>
-        <ion-card-header>
-          Doughnut Chart
-        </ion-card-header>
+        
         <ion-card-content>
           <canvas #doughnutCanvas></canvas>
         </ion-card-content>
       </ion-card>
    
       <ion-card>
-        <ion-card-header>
-          Line Chart
-        </ion-card-header>
+        
         <ion-card-content>
           <canvas #lineCanvas></canvas>
         </ion-card-content>
