@@ -14,14 +14,14 @@
 
 
 <ion-content padding>
-<h1>Add your Accounts</h1>
+<h1>Add New Account</h1>
 
     <ion-list no-margin>
         <ion-list-header>
           
         </ion-list-header>
         <ion-item>
-          <ion-label>Type of Account:</ion-label>
+          <ion-label>Account Type:</ion-label>
           <ion-select [(ngModel)]="myParam" multiple="false">
             <ion-option value="Checking">Checking</ion-option>
             <ion-option value="Savings">Savings</ion-option>
@@ -32,6 +32,14 @@
           </ion-select>
         </ion-item>
       </ion-list>
+      <h1>Added Accounts</h1>
+    <ion-item *ngFor="let account of accountList" style="width:100%">
+       <h1>{{account.Name}}</h1>
+       <p>{{account.Type}}</p>
+       <p>
+           <strong>{{account.Balance}}</strong>
+       </p>
+   </ion-item>
     
       <div padding>
         <button ion-button block color="primary" (click)="openModalWithParams()">Add an Account</button>
