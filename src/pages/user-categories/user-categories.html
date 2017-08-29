@@ -1,9 +1,4 @@
-<!--
-  Generated template for the UserCategoriesPage page.
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
@@ -24,4 +19,30 @@
         <h1>{{category.Balance}}</h1> 
     
     </ion-item>
+    <ion-card>
+        <ion-card-header>
+          Bar Chart
+        </ion-card-header>
+        <ion-card-content>
+          <canvas #barCanvas></canvas>
+        </ion-card-content>
+      </ion-card>
+   
+      <ion-card>
+        <ion-card-header>
+          Doughnut Chart
+        </ion-card-header>
+        <ion-card-content>
+          <canvas #doughnutCanvas></canvas>
+        </ion-card-content>
+      </ion-card>
+   
+      <ion-card>
+        <ion-card-header>
+          Line Chart
+        </ion-card-header>
+        <ion-card-content>
+          <canvas #lineCanvas></canvas>
+        </ion-card-content>
+      </ion-card>
 </ion-content>

@@ -4,8 +4,9 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-
-
+//charting
+import {ChartsModule} from 'ng2-charts/charts/charts';
+import '../../node_modules/chart.js/dist/Chart.bundle.min.js';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 //Firebase/Af2
@@ -27,7 +28,8 @@ import { UserProvider } from '../providers/user/user';
     BrowserModule,
     IonicModule.forRoot(MyApp),
     //af2
-    AngularFireModule.initializeApp(config)
+    AngularFireModule.initializeApp(config),
+    ChartsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
