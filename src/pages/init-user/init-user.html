@@ -16,22 +16,12 @@
 <ion-content padding>
 <h1>Add New Account</h1>
 
-    <ion-list no-margin>
-        <ion-list-header>
-          
-        </ion-list-header>
+
+
         <ion-item>
-          <ion-label>Account Type:</ion-label>
-          <ion-select [(ngModel)]="myParam" multiple="false">
-            <ion-option value="Checking">Checking</ion-option>
-            <ion-option value="Savings">Savings</ion-option>
-            <ion-option value="Credit">Credit</ion-option>
-            <ion-option value="Cash">Cash</ion-option>
-            <ion-option value="Other">Other</ion-option>
-         
-          </ion-select>
+          <ion-icon name="add" style="font-size: 3em;" (click)="openModalWithParams()"></ion-icon>
         </ion-item>
-      </ion-list>
+    
       <h1>Added Accounts</h1>
     <ion-item *ngFor="let account of accountList" style="width:100%">
        <h1>{{account.Name}}</h1>
