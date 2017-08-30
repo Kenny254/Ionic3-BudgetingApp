@@ -22,8 +22,19 @@
       <div [hidden]="myParam">
         <p>No parameters passed.</p>
       </div>
-
       
+      
+      <ion-item>
+          <ion-label>Account Type:</ion-label>
+          <ion-select [(ngModel)]="myParam" multiple="false">
+            <ion-option value="Checking">Checking</ion-option>
+            <ion-option value="Savings">Savings</ion-option>
+            <ion-option value="Credit">Credit</ion-option>
+            <ion-option value="Cash">Cash</ion-option>
+            <ion-option value="Other">Other</ion-option>
+         
+          </ion-select>
+        </ion-item>
       <ion-item>
           <ion-label>Account Name</ion-label>
           <ion-input [(ngModel)]="accountName" type="text" placeholder="Bank Of America Checking">

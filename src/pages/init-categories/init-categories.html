@@ -15,13 +15,18 @@
     
     <ion-content padding>
     <h1>Add your Categories</h1>
-    
+     <ion-icon name="add" style="font-size: 3em;" (click)="openModalWithParams()"></ion-icon>
+    <h1>Added categories</h1>
+    <ion-item *ngFor="let category of categoryList" style="width:100%">
+       <h1>{{category.Name}}</h1>
+    <p>{{category.Balance}}</p> 
+   </ion-item>
         
            
         
           <div padding>
-            <button ion-button block color="primary" (click)="openModalWithParams()">Add a Category</button>
-            <button ion-button block color="danger" (click)="gotoinitCategories()">Next</button>
+            <!--<button ion-button block color="primary" (click)="openModalWithParams()">Add a Category</button>-->
+            <button id="nextButton" ion-button block color="primary" (click)="gotoinitCategories()">Next</button>
           </div>
     </ion-content>
     
