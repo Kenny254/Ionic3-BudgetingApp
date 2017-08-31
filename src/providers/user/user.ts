@@ -5,9 +5,17 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class UserProvider {
+  userProfileRef: firebase.database.Reference;
   firedata = firebase.database().ref('/users');
+  UID;
   constructor(public afireauth: AngularFireAuth) {
-    
+     //grab uid and link it up
+     firebase.auth().onAuthStateChanged( user => {
+      if (user) {
+        this.UID = user.uid;
+        this.userProfileRef = firebase.database().ref(`users/${user.uid}`);
+      }
+    });
   }
   //create user with email/pass/nickname
   adduser(newuser) {
@@ -20,7 +28,7 @@ export class UserProvider {
           this.firedata.child(this.afireauth.auth.currentUser.uid).set({
             uid: this.afireauth.auth.currentUser.uid,
             displayName: newuser.displayName,
-            photoURL: 'give a dummy placeholder url here'
+            photoURL: 'N/A'
           }).then(() => {
             console.log('succesfully stored user variables')
             resolve({ success: true });
@@ -36,4 +44,45 @@ export class UserProvider {
     })
     return promise;
   }
+
+  createProfile(pay:number,rent:number,insurance:number,phone:number): firebase.Promise<any> 
+  {
+    //error catches
+    if (typeof pay !== 'undefined') {
+      // the variable is defined
+    }
+    if (typeof rent !== 'undefined') {
+    // the variable is defined
+    }
+    if (typeof insurance !== 'undefined') {
+    // the variable is defined
+    }
+    if (typeof phone !== 'undefined') {
+    // the variable is defined
+    }
+    //console logging changes in firebase
+    this.userProfileRef.on("value", function(snapshot) 
+      {
+        console.log("userProfileRef log" + snapshot.val());
+      },  function (errorObject) 
+        {
+          console.log("The read failed: " + errorObject.code);
+        });
+
+      //the actual push to firebase
+      this.userProfileRef.child('userinfo').update({
+       Pay: pay,
+       Rent: rent,
+       Insurance: insurance,
+       Phone: phone
+      
+    })
+         
+    
+  return 
+  }
+
+
+
+
 }

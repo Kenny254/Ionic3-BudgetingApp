@@ -1,3 +1,4 @@
+import { UserProvider } from './../../providers/user/user';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
@@ -15,7 +16,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class AddUserInfoPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public userProvider: UserProvider) {
   }
 
   ionViewDidLoad() {
@@ -26,4 +27,8 @@ export class AddUserInfoPage {
     this.navCtrl.setRoot('InitUserPage');
   }
 
+  addProfileInfo(pay:number,rent:number,insurance:number,phone:number){
+    this.userProvider.createProfile(pay,rent,insurance,phone);
+    this.gotoInitAccounts();
+  }
 }

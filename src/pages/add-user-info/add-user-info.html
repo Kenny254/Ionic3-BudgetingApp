@@ -14,5 +14,36 @@
 
 
 <ion-content padding>
-<button (click)="gotoInitAccounts();">Continue</button>
+    <ion-item>
+        <ion-label>Pay</ion-label>
+        <ion-input [(ngModel)]="pay" type="number" placeholder="50.00">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+          <ion-label>Rent</ion-label>
+          <ion-input [(ngModel)]="rent" type="number" placeholder="50.00">
+          </ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Insurace</ion-label>
+            <ion-input [(ngModel)]="insurance" type="number" placeholder="50.00">
+            </ion-input>
+          </ion-item>
+
+          <ion-item>
+              <ion-label>Cell Phones</ion-label>
+              <ion-input [(ngModel)]="phone" type="number" placeholder="50.00">
+              </ion-input>
+            </ion-item>
+
+
+
+
+      <button ion-button block (click)="addProfileInfo(pay,rent,insurance,phone)">
+          Add
+        </button>
+
+
 </ion-content>
