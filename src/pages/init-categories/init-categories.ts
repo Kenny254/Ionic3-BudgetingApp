@@ -42,7 +42,7 @@ export class InitCategoriesPage {
     this.budgetProvider.createCategory(categoryName, categoryBalance);
   }
 
-  openModalWithParams() {
+  openCategoryModalWithParams() {
     let myModal = this.modalCtrl.create('AddCategoryModalPage');
     myModal.present();
   }

@@ -5,45 +5,106 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar>
     <ion-title>AddUserInfo</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
-<ion-content padding>
-    <ion-item>
+<ion-content>
+    <div>
         <ion-label>Pay</ion-label>
         <ion-input [(ngModel)]="pay" type="number" placeholder="50.00">
         </ion-input>
-      </ion-item>
+        <ion-item>
+          <ion-label>How often are you paid?:</ion-label>
+          <ion-select [(ngModel)]="payPeriod" multiple="false">
+            <ion-option value="week">Weekly</ion-option>
+            <ion-option value="20160">BiWeekly</ion-option>
+            <ion-option value="month">Monthly</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-list no-lines>          
+                 <ion-item>
+                     <ion-label>on which day:</ion-label>
+                 </ion-item>
+          
+                 <ion-item *ngFor="let day of days">
+                     <ion-label>{{day.title}}</ion-label>
+                     <ion-checkbox [(ngModel)]="day.checked" color="primary"></ion-checkbox>
+                 </ion-item>
+                 <ion-item>
+                  <ion-label>Notify me at: </ion-label>
+                  <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="notifyTime" (ionChange)="timeChange($event)"></ion-datetime>
+                </ion-item>
+             </ion-list>
+      </div>
 
-      <ion-item>
+      <div>
           <ion-label>Rent</ion-label>
           <ion-input [(ngModel)]="rent" type="number" placeholder="50.00">
           </ion-input>
-        </ion-item>
+        
+          <ion-list no-lines>
 
-        <ion-item>
+                   <ion-item>
+                       <ion-label>on which day:</ion-label>
+                   </ion-item>
+                   <ion-item *ngFor="let day of days">
+                       <ion-label>{{day.title}}</ion-label>
+                       <ion-checkbox [(ngModel)]="day.checked" color="primary"></ion-checkbox>
+                   </ion-item>
+                   <ion-item>
+                    <ion-label>Notify me at: </ion-label>
+                    <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="notifyTime" (ionChange)="timeChange($event)"></ion-datetime>
+                  </ion-item>
+               </ion-list>
+        </div>
+
+        <div>
             <ion-label>Insurace</ion-label>
             <ion-input [(ngModel)]="insurance" type="number" placeholder="50.00">
-            </ion-input>
-          </ion-item>
+            </ion-input>       
+            <ion-list no-lines>
+                     <ion-item>
+                         <ion-label>on which day:</ion-label>
+                     </ion-item>
+              
+                     <ion-item *ngFor="let day of days">
+                         <ion-label>{{day.title}}</ion-label>
+                         <ion-checkbox [(ngModel)]="day.checked" color="primary"></ion-checkbox>
+                     </ion-item>
+                     <ion-item>
+                      <ion-label>Notify me at: </ion-label>
+                      <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="notifyTime" (ionChange)="timeChange($event)"></ion-datetime>
+                    </ion-item>
+                 </ion-list>
+          </div>
 
-          <ion-item>
+          <div>
               <ion-label>Cell Phones</ion-label>
               <ion-input [(ngModel)]="phone" type="number" placeholder="50.00">
               </ion-input>
-            </ion-item>
+              <ion-list no-lines>
+                       <ion-item>
+                           <ion-label>on which day:</ion-label>
+                       </ion-item>                
+                       <ion-item *ngFor="let day of days">
+                           <ion-label>{{day.title}}</ion-label>
+                           <ion-checkbox [(ngModel)]="day.checked" color="primary"></ion-checkbox>
+                       </ion-item>
+                       <ion-item>
+                        <ion-label>Notify me at: </ion-label>
+                        <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="notifyTime" (ionChange)="timeChange($event)"></ion-datetime>
+                      </ion-item>
+                   </ion-list>
+            </div>
 
 
 
 
-      <button ion-button block (click)="addProfileInfo(pay,rent,insurance,phone)">
+      <button ion-button block (click)="addProfileInfo(pay,rent,insurance,phone);addpayNotifications(payPeriod); addrentNotifications(); addinsuranceNotifications(); addphoneNotifications();">
           Add
         </button>
-
 
 </ion-content>

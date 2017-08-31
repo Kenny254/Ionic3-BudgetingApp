@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import {BudgetProvider} from '../../providers/budget/budget';
 import {AddAccountModalPage } from '../add-account-modal/add-account-modal';
-
+import {HomePage} from '../home/home';
 @IonicPage()
 @Component({
   selector: 'page-init-user',
@@ -12,6 +12,7 @@ import {AddAccountModalPage } from '../add-account-modal/add-account-modal';
 export class InitUserPage {
   accountList: Array<any>;
   myParam = '';
+  categoryList: Array<any>;
   constructor(public navCtrl: NavController, public params: NavParams,public modalCtrl: ModalController,
   public budgetProvider: BudgetProvider) {
     //constructor
@@ -34,6 +35,22 @@ export class InitUserPage {
         return false
       });
       });
+
+      this.budgetProvider.getCategories().on('value', snapshot => {
+        this.categoryList = [];
+        snapshot.forEach( snap => {
+          this.categoryList.push({
+            id: snap.key,
+         
+            Name: snap.val().CategoryName,
+            Balance: snap.val().CategoryBalance
+       
+          });
+          console.log(this.categoryList);
+          return false
+        });
+        });
+
   }
 
 
@@ -47,8 +64,12 @@ export class InitUserPage {
     let myModal = this.modalCtrl.create('AddAccountModalPage', { 'myParam': this.myParam });
     myModal.present();
   }
+  openCategoryModalWithParams() {
+    let myModal = this.modalCtrl.create('AddCategoryModalPage');
+    myModal.present();
+  }
 
   gotoinitCategories(){
-    this.navCtrl.setRoot('InitCategoriesPage')
+    this.navCtrl.setRoot(HomePage)
   }
 }
