@@ -10,8 +10,9 @@ import {HomePage} from '../home/home';
   templateUrl: 'init-user.html',
 })
 export class InitUserPage {
-  accountList: Array<any>;
   myParam = '';
+  accountList: Array<any>;
+  billsList: Array<any>;
   categoryList: Array<any>;
   constructor(public navCtrl: NavController, public params: NavParams,public modalCtrl: ModalController,
   public budgetProvider: BudgetProvider) {
@@ -54,11 +55,7 @@ export class InitUserPage {
   }
 
 
-  
-  createAccount(accountType:string,accountName: string, accountBalance: number)
-  {
-    this.budgetProvider.createAccount(accountType,accountName, accountBalance);
-  }
+ 
 
   openModalWithParams() {
     let myModal = this.modalCtrl.create('AddAccountModalPage', { 'myParam': this.myParam });
@@ -69,7 +66,7 @@ export class InitUserPage {
     myModal.present();
   }
 
-  gotoinitCategories(){
+  gotoHome(){
     this.navCtrl.setRoot(HomePage)
   }
 }

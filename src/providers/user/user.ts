@@ -1,3 +1,4 @@
+import { NavController } from 'ionic-angular';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import firebase from 'firebase';
@@ -8,7 +9,7 @@ export class UserProvider {
   userProfileRef: firebase.database.Reference;
   firedata = firebase.database().ref('/users');
   UID;
-  constructor(public afireauth: AngularFireAuth) {
+  constructor(public afireauth: AngularFireAuth, ) {
      //grab uid and link it up
      firebase.auth().onAuthStateChanged( user => {
       if (user) {
@@ -45,21 +46,13 @@ export class UserProvider {
     return promise;
   }
 
-  createProfile(pay:number,rent:number,insurance:number,phone:number): firebase.Promise<any> 
+  createProfile(pay:number,): firebase.Promise<any> 
   {
     //error catches
     if (typeof pay !== 'undefined') {
       // the variable is defined
     }
-    if (typeof rent !== 'undefined') {
-    // the variable is defined
-    }
-    if (typeof insurance !== 'undefined') {
-    // the variable is defined
-    }
-    if (typeof phone !== 'undefined') {
-    // the variable is defined
-    }
+   
     //console logging changes in firebase
     this.userProfileRef.on("value", function(snapshot) 
       {
@@ -72,14 +65,17 @@ export class UserProvider {
       //the actual push to firebase
       this.userProfileRef.child('userinfo').update({
        Pay: pay,
-       Rent: rent,
-       Insurance: insurance,
-       Phone: phone
+      
       
     })
          
     
   return 
+  }
+
+  logoutUser(): firebase.Promise<any> {
+    return this.afireauth.auth.signOut()
+    
   }
 
 

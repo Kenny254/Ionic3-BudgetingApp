@@ -12,99 +12,96 @@
 
 
 <ion-content>
-    <div>
-        <ion-label>Pay</ion-label>
-        <ion-input [(ngModel)]="pay" type="number" placeholder="50.00">
-        </ion-input>
-        <ion-item>
-          <ion-label>How often are you paid?:</ion-label>
-          <ion-select [(ngModel)]="payPeriod" multiple="false">
-            <ion-option value="week">Weekly</ion-option>
-            <ion-option value="20160">BiWeekly</ion-option>
-            <ion-option value="month">Monthly</ion-option>
-          </ion-select>
-        </ion-item>
-        <ion-list no-lines>          
-                 <ion-item>
-                     <ion-label>on which day:</ion-label>
-                 </ion-item>
-          
-                 <ion-item *ngFor="let day of days">
-                     <ion-label>{{day.title}}</ion-label>
-                     <ion-checkbox [(ngModel)]="day.checked" color="primary"></ion-checkbox>
-                 </ion-item>
-                 <ion-item>
-                  <ion-label>Notify me at: </ion-label>
-                  <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="notifyTime" (ionChange)="timeChange($event)"></ion-datetime>
-                </ion-item>
-             </ion-list>
-      </div>
 
-      <div>
-          <ion-label>Rent</ion-label>
-          <ion-input [(ngModel)]="rent" type="number" placeholder="50.00">
-          </ion-input>
-        
-          <ion-list no-lines>
+        <ion-slides pager="true">
+                <!-- PAY SLIDE -->
+                 <ion-slide>
+                        <div>
+                                <ion-list no-lines>
+                            <ion-item>
+                                <ion-label>Pay</ion-label>
+                                <ion-input [(ngModel)]="pay" type="number" placeholder="50.00">
+                                </ion-input>
+                            </ion-item>
+                       <br>
+                       <br>
+                       <br>
+                                <ion-item>
+                                  <ion-label>How often are you paid?:</ion-label>
+                                  <ion-select [(ngModel)]="payPeriod" multiple="false">
+                                    <ion-option value="week">Weekly</ion-option>
+                                    <ion-option value="20160">BiWeekly</ion-option>
+                                    <ion-option value="month">Monthly</ion-option>
+                                  </ion-select>
+                                </ion-item>
+                                <br>
+                                <br>
+                                <br> 
+                                    
+                                         <ion-item>
+                                             <ion-label>on which day:</ion-label>
+                                         </ion-item>
+                                    
+                                         <ion-item *ngFor="let day of days">
+                                             <ion-label>{{day.title}}</ion-label>
+                                             <ion-checkbox [(ngModel)]="day.checked" color="primary"></ion-checkbox>
+                                         </ion-item>
+                                       
+                                         <ion-item>
+                                          <ion-label>Notify me at: </ion-label>
+                                          <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="notifyTime" (ionChange)="timeChange($event)"></ion-datetime>
+                                        </ion-item>
+                                        <button ion-button block (click)=" addProfileInfo(pay);addpayNotifications(payPeriod);">
+                                                Add
+                                              </button>
+                                     </ion-list>
+                              </div>
+                       </ion-slide>
 
-                   <ion-item>
-                       <ion-label>on which day:</ion-label>
-                   </ion-item>
-                   <ion-item *ngFor="let day of days">
-                       <ion-label>{{day.title}}</ion-label>
-                       <ion-checkbox [(ngModel)]="day.checked" color="primary"></ion-checkbox>
-                   </ion-item>
-                   <ion-item>
-                    <ion-label>Notify me at: </ion-label>
-                    <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="notifyTime" (ionChange)="timeChange($event)"></ion-datetime>
-                  </ion-item>
-               </ion-list>
-        </div>
-
-        <div>
-            <ion-label>Insurace</ion-label>
-            <ion-input [(ngModel)]="insurance" type="number" placeholder="50.00">
-            </ion-input>       
-            <ion-list no-lines>
-                     <ion-item>
-                         <ion-label>on which day:</ion-label>
-                     </ion-item>
-              
-                     <ion-item *ngFor="let day of days">
-                         <ion-label>{{day.title}}</ion-label>
-                         <ion-checkbox [(ngModel)]="day.checked" color="primary"></ion-checkbox>
-                     </ion-item>
-                     <ion-item>
-                      <ion-label>Notify me at: </ion-label>
-                      <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="notifyTime" (ionChange)="timeChange($event)"></ion-datetime>
-                    </ion-item>
-                 </ion-list>
-          </div>
-
-          <div>
-              <ion-label>Cell Phones</ion-label>
-              <ion-input [(ngModel)]="phone" type="number" placeholder="50.00">
-              </ion-input>
-              <ion-list no-lines>
-                       <ion-item>
-                           <ion-label>on which day:</ion-label>
-                       </ion-item>                
-                       <ion-item *ngFor="let day of days">
-                           <ion-label>{{day.title}}</ion-label>
-                           <ion-checkbox [(ngModel)]="day.checked" color="primary"></ion-checkbox>
-                       </ion-item>
-                       <ion-item>
-                        <ion-label>Notify me at: </ion-label>
-                        <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="notifyTime" (ionChange)="timeChange($event)"></ion-datetime>
-                      </ion-item>
-                   </ion-list>
-            </div>
-
-
-
-
-      <button ion-button block (click)="addProfileInfo(pay,rent,insurance,phone);addpayNotifications(payPeriod); addrentNotifications(); addinsuranceNotifications(); addphoneNotifications();">
-          Add
-        </button>
+                           <!-- ACCOUNT SLIDE -->
+                     <ion-slide>
+                        <h1>Add New Account</h1>
+                            <ion-icon name="add" style="font-size: 3em;" (click)="openModalWithParams()"></ion-icon>
+                            
+                              <h1>Added Accounts</h1>
+                            <ion-item *ngFor="let account of accountList" style="width:100%">
+                               <h1>{{account.Name}}</h1>
+                               <p>{{account.Type}}</p>
+                               <p>
+                                   <strong>{{account.Balance}}</strong>
+                               </p>
+                           </ion-item>
+                         </ion-slide>
+                         
+                    <!-- BILL SLIDE -->
+                       <ion-slide>
+                            <h1>Add Your Bills</h1>                   
+                                <ion-icon name="add" style="font-size: 3em;" (click)="openBillModalWithParams()"></ion-icon>
+                                
+                                  <h1>Added Bills</h1>
+                                <ion-item *ngFor="let bill of billsList" style="width:100%">
+                                   <h1>{{bill.Name}}</h1>
+                                   
+                                   <p>
+                                       <strong>{{bill.Amount}}</strong>
+                                   </p>
+                               </ion-item>
+                 </ion-slide>
+             
+                <!-- CATEGORY SLIDE -->
+                 <ion-slide>
+                        <h1>Add your Categories</h1>
+                        <ion-icon name="add" style="font-size: 3em;" (click)="openCategoryModalWithParams()"></ion-icon>
+                      <h1>Added categories</h1>
+                      <ion-item *ngFor="let category of categoryList" style="width:100%">
+                          <h1>{{category.Name}}</h1>
+                      <p>{{category.Balance}}</p> 
+                      </ion-item>     
+                      <button ion-button (click)="gotoHome();">Done</button>
+                     
+                 </ion-slide>
+           
+        </ion-slides>
+     
 
 </ion-content>

@@ -1,6 +1,9 @@
 import { UserProvider } from './../../providers/user/user';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform, AlertController,ModalController } from 'ionic-angular';
+import {BudgetProvider} from '../../providers/budget/budget';
+import {AddAccountModalPage } from '../add-account-modal/add-account-modal';
+import {HomePage} from '../home/home';
 //for notifs
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import * as moment from 'moment';
@@ -23,7 +26,12 @@ export class AddUserInfoPage {
   days: any[];
   chosenHours: number;
   chosenMinutes: number;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public userProvider: UserProvider, 
+  accountList: Array<any>;
+  myParam = '';
+  categoryList: Array<any>;
+  billsList: Array<any>;
+  constructor(public navCtrl: NavController, public navParams: NavParams,public modalCtrl: ModalController,
+    public budgetProvider: BudgetProvider, public userProvider: UserProvider, 
     public platform: Platform, public alertCtrl: AlertController, public localNotifications: LocalNotifications) {
     this.notifyTime = moment(new Date()).format();
             //grabbing date from device
@@ -42,20 +50,83 @@ export class AddUserInfoPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AddUserInfoPage');
+      console.log("entering page")
+      //snapping public list values
+      this.budgetProvider.getAccounts().on('value', snapshot => {
+        this.accountList = [];
+        snapshot.forEach( snap => {
+          this.accountList.push({
+            id: snap.key,
+           Type: snap.val().Account_Type,
+            Name: snap.val().Accountname,
+           Balance: snap.val().Accountbalance
+          });
+         
+          return false
+        });
+        });
+  
+        this.budgetProvider.getCategories().on('value', snapshot => {
+          this.categoryList = [];
+          snapshot.forEach( snap => {
+            this.categoryList.push({
+              id: snap.key,
+           
+              Name: snap.val().CategoryName,
+              Balance: snap.val().CategoryBalance
+         
+            });
+           
+            return false
+          });
+          });
+
+          this.budgetProvider.getBills().on('value', snapshot => {
+            this.billsList = [];
+            snapshot.forEach( snap => {
+              this.billsList.push({
+                id: snap.key,
+              Name: snap.val().billName,
+                Amount: snap.val().billAmount,
+              
+              });
+              console.log("Bills"+this.billsList,"Accounts"+ this.accountList,"Categories"+ this.categoryList);
+              return false
+            });
+            });
   }
 
   gotoInitAccounts(){
     this.navCtrl.setRoot('InitUserPage');
   }
 
-  addProfileInfo(pay:number,rent:number,insurance:number,phone:number){
-    this.userProvider.createProfile(pay,rent,insurance,phone);
-    this.gotoInitAccounts();
+  addProfileInfo(pay:number){
+    this.userProvider.createProfile(pay);
+    
   }
 
+  createAccount(accountType:string,accountName: string, accountBalance: number)
+  {
+    this.budgetProvider.createAccount(accountType,accountName, accountBalance);
+  }
 
+  openModalWithParams() {
+    let myModal = this.modalCtrl.create('AddAccountModalPage', { 'myParam': this.myParam });
+    myModal.present();
+  }
+  openCategoryModalWithParams() {
+    let myModal = this.modalCtrl.create('AddCategoryModalPage');
+    myModal.present();
+  }
+  openBillModalWithParams() {
+    let myModal = this.modalCtrl.create('AddBillModalPage');
+    myModal.present();
+  }
 
+  
+  gotoHome(){
+    this.navCtrl.setRoot(HomePage)
+  }
   /*NOTIF AND TIME LOGGING */
   timeChange(time){
     this.chosenHours = time.hour.value;
