@@ -1,7 +1,8 @@
+import { UserProvider } from './../../providers/user/user';
 import { BudgetProvider } from './../../providers/budget/budget';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, ModalController } from 'ionic-angular';
-import { UserProvider } from '../../providers/user/user';
+
 
 @Component({
   selector: 'page-home',
@@ -11,7 +12,8 @@ export class HomePage {
   public accountList: Array<any>;
   public categoryList: Array<any>;
   public expenseList: Array<any>;
-  constructor(public modalCtrl: ModalController,public navCtrl: NavController, public budgetProvider:BudgetProvider) {
+  public billsList: Array<any>;
+  constructor(public modalCtrl: ModalController,public navCtrl: NavController, public budgetProvider:BudgetProvider, public userProvider: UserProvider) {
 
   }
   ionViewDidEnter() 
@@ -62,11 +64,27 @@ export class HomePage {
             return false
           });
           });
-  
+          this.budgetProvider.getBills().on('value', snapshot => {
+            this.billsList = [];
+            snapshot.forEach( snap => {
+              this.billsList.push({
+                id: snap.key,
+              Name: snap.val().billName,
+                Amount: snap.val().billAmount,
+              
+              });
+              console.log("Bills"+this.billsList,"Accounts"+ this.accountList,"Categories"+ this.categoryList);
+              return false
+            });
+            });
   }
   openExpenseModal() {
     let myModal = this.modalCtrl.create('AddExpenseModalPage');
     myModal.present();
   }
 
+  logOut(){
+    this.userProvider.logoutUser().then( () => this.navCtrl.setRoot('LoginPage'));
+    
+  }
 }

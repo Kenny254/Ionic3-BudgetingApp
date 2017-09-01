@@ -9,6 +9,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import 'rxjs/add/observable/fromPromise'
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { IonicStorageModule } from '@ionic/storage';  
 //charting
 import {ChartsModule} from 'ng2-charts/charts/charts';
 import '../../node_modules/chart.js/dist/Chart.bundle.min.js';
@@ -31,7 +32,8 @@ import { UserProvider } from '../providers/user/user';
     IonicModule.forRoot(MyApp),
     //af2
     AngularFireModule.initializeApp(config),
-    ChartsModule
+    ChartsModule,
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [

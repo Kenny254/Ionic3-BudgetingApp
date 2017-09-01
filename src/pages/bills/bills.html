@@ -1,0 +1,25 @@
+<!--
+  Generated template for the BillsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Bills</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <h1>Bills</h1>
+    <ion-item *ngFor="let bill of billsList" style="width:100%">
+        <h2>{{bill.Name}}</h2>
+        
+        <p>
+            <strong>{{bill.Amount}}</strong>
+        </p>
+    </ion-item>
+</ion-content>

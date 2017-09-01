@@ -69,6 +69,28 @@ export class BudgetProvider {
   return 
   }
 
+  createBill(billName:string, billAmount: number): firebase.Promise<any> 
+  {
+    //console logging changes in firebase
+    this.userProfileRef.on("value", function(snapshot) 
+      {
+        console.log("userProfileRef log" + snapshot.val());
+      },  function (errorObject) 
+        {
+          console.log("The read failed: " + errorObject.code);
+        });
+
+      //the actual push to firebase
+      this.userProfileRef.child('bills').push({
+        billName: billName,
+        billAmount: billAmount
+      
+    })
+         
+    
+  return 
+  }
+
   addExpense(accountName:string, accountID, categoryName:string, categoryID:string, amount:number){
     
      //console logging changes in firebase
@@ -105,6 +127,10 @@ export class BudgetProvider {
 
   getCategories(): firebase.database.Reference {
     return this.userProfileRef.child("/categories");
+  }
+
+  getBills(): firebase.database.Reference {
+    return this.userProfileRef.child("/bills");
   }
 
   getExpenses(): firebase.database.Reference {

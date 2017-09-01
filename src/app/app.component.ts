@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-
+import { AngularFireAuth } from 'angularfire2/auth';  
 import { HomePage } from '../pages/home/home';
 
 
@@ -16,7 +16,7 @@ export class MyApp {
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public afAuth: AngularFireAuth) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -25,6 +25,7 @@ export class MyApp {
       { title: 'Accounts', component: 'BalancesPage' },
       { title: 'Categories', component: 'UserCategoriesPage' },
       { title: 'Expenses', component: 'UserExpensesPage' },
+      { title: 'Bills', component: 'BillsPage' },
       { title: 'Settings', component: 'UserSettingsPage' },
      
     ];
@@ -33,6 +34,15 @@ export class MyApp {
 
   initializeApp() {
     this.platform.ready().then(() => {
+      const authObserver = this.afAuth.authState.subscribe( user => {
+        if (user) {
+          this.rootPage = HomePage;
+          authObserver.unsubscribe();
+        } else {
+          this.rootPage = 'LoginPage';
+          authObserver.unsubscribe();
+        }
+      });
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
