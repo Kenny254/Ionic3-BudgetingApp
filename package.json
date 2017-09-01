@@ -28,6 +28,8 @@
         "angular-highcharts": "^3.4.5",
         "angularfire2": "^4.0.0-rc.2",
         "chart.js": "^2.6.0",
+        "cordova-android": "^6.2.3",
+        "cordova-plugin-device": "file:node_modules/cordova-plugin-device",
         "de.appplant.cordova.plugin.local-notification": "^0.8.5",
         "firebase": "^4.3.0",
         "highcharts": "^5.0.14",
