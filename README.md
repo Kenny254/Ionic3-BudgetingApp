@@ -12,5 +12,9 @@ npm i --save angular-highcharts highcharts
 ionic cordova plugin add de.appplant.cordova.plugin.local-notification
 npm install --save @ionic-native/local-notifications
 npm install moment --save
+npm install promise-polyfill --save-exact
+
+for notifications see
+https://github.com/katzer/cordova-plugin-local-notifications/issues/1344
 
 ```
