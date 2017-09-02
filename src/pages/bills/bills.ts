@@ -17,10 +17,7 @@ export class BillsPage {
   billsList: Array<any>;
   constructor(public modalCtrl: ModalController,public navCtrl: NavController, public navParams: NavParams, public budgetProvider: BudgetProvider) {
   }
-openModalWithParams() {
-    let myModal = this.modalCtrl.create('AddBillModalPage');
-    myModal.present();
-  }
+
   ionViewDidLoad() {
     this.budgetProvider.getBills().on('value', snapshot => {
       this.billsList = [];
@@ -35,6 +32,11 @@ openModalWithParams() {
         return false
       });
       });
+  }
+
+  openModalWithParams() {
+    let myModal = this.modalCtrl.create('AddBillModalPage');
+    myModal.present();
   }
 
 }

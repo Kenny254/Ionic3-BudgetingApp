@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { BudgetProvider } from './../../providers/budget/budget';
 /**
  * Generated class for the UserExpensesPage page.
@@ -15,7 +15,7 @@ import { BudgetProvider } from './../../providers/budget/budget';
 })
 export class UserExpensesPage {
   expenseList: Array<any>;
-  constructor(public budgetProvider: BudgetProvider,public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public modalCtrl:ModalController,public budgetProvider: BudgetProvider,public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidEnter() {
@@ -36,5 +36,10 @@ export class UserExpensesPage {
       });
       });
   }
+  
+  openExpenseModal() {
+    let myModal = this.modalCtrl.create('AddExpenseModalPage');
+    myModal.present();
+  }  
 
 }

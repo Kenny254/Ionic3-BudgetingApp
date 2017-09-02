@@ -113,7 +113,7 @@ export class BudgetProvider {
      date: date
    })
    //push expense to individual account
-   this.userProfileRef.child('accounts').child(accountID).child('/expenses').update({
+   this.userProfileRef.child('accounts').child(accountID).child('/expenses').push({
     AccountName: accountName,
     CategoryName: categoryName,
     amount: amount,
@@ -126,7 +126,7 @@ export class BudgetProvider {
     return currentbalance -= amount;
   });
   //push expensne to individual account
-  this.userProfileRef.child('categories').child(categoryID).child('/expenses').update({
+  this.userProfileRef.child('categories').child(categoryID).child('/expenses').push({
     AccountName: accountName,
     CategoryName: categoryName,
     amount: amount,
