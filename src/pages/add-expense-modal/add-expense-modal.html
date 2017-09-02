@@ -17,18 +17,34 @@
     <ion-item>
         <ion-label>Account</ion-label>
         <ion-select [(ngModel)]="Account" >
-          <ion-option value="{{account.id}}" *ngFor="let account of accountList">{{account.Name}}</ion-option>
+          <ion-option value="{{account.Name}}" *ngFor="let account of accountList">{{account.Name}}</ion-option>
          
         </ion-select>
       </ion-item>
 
       <ion-item>
-          <ion-label>Category</ion-label>
-          <ion-select [(ngModel)]="Category" >
-            <ion-option value="{{category.id}}" *ngFor="let category of categoryList">{{category.Name}}</ion-option>
+          <ion-label>Account</ion-label>
+          <ion-select [(ngModel)]="Account2" >
+            <ion-option value="{{account.id}}" *ngFor="let account of accountList">{{account.Name}}</ion-option>
            
           </ion-select>
         </ion-item>
+
+      <ion-item>
+          <ion-label>Category</ion-label>
+          <ion-select [(ngModel)]="Category" >
+            <ion-option value="{{category.Name}}" *ngFor="let category of categoryList">{{category.Name}}</ion-option>
+           
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+        <ion-label>Category</ion-label>
+        <ion-select [(ngModel)]="Category2" >
+          <ion-option value="{{category.id}}" *ngFor="let category of categoryList">{{category.Name}}</ion-option>
+         
+        </ion-select>
+      </ion-item>
         <ion-item>
           <ion-label>Payee</ion-label>
           <ion-input [(ngModel)]="expensePayee" type="text" placeholder="Wal-Mart">
@@ -44,7 +60,7 @@
             <ion-input [(ngModel)]="expenseAmount" type="number" placeholder="How Much?"></ion-input>
           </ion-item>
 
-          <button ion-button block (click)=" addExpense(Account,Account, Category, Category, expenseAmount, expensePayee, expenseNote);">
+          <button ion-button block (click)=" addExpense(Account,Account2, Category, Category2, expenseAmount, expensePayee, expenseNote);">
               Add Expense
             </button>
 </ion-content>

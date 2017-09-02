@@ -12,11 +12,12 @@
 
 
 <ion-content>
-    <h1 padding>Categories</h1>
+    <h1 padding>Categories(Amount Spent)</h1>
    <ion-item *ngFor="let category of categoryList" >  
     
         <h1>{{category.Name}}</h1> 
-        <h1>{{category.Balance}}</h1> 
+        <h1 *ngIf="category.Balance >= 1">{{category.Balance}}</h1> 
+        <p *ngIf="category.Balance === 0">Nothing has been spent in this category!</p> 
     
     </ion-item>
     <ion-icon name="add" style="font-size: 3em;" (click)="openCategoryModalWithParams()"></ion-icon>
