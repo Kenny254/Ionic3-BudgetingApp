@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { BudgetProvider } from './../../providers/budget/budget';
 /**
  * Generated class for the BillsPage page.
@@ -15,9 +15,12 @@ import { BudgetProvider } from './../../providers/budget/budget';
 })
 export class BillsPage {
   billsList: Array<any>;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public budgetProvider: BudgetProvider) {
+  constructor(public modalCtrl: ModalController,public navCtrl: NavController, public navParams: NavParams, public budgetProvider: BudgetProvider) {
   }
-
+openModalWithParams() {
+    let myModal = this.modalCtrl.create('AddBillModalPage');
+    myModal.present();
+  }
   ionViewDidLoad() {
     this.budgetProvider.getBills().on('value', snapshot => {
       this.billsList = [];
