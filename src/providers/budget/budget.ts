@@ -23,7 +23,9 @@ export class BudgetProvider {
       }
     });
   }//end of constructor
-
+  ionViewDidLoad(){
+   console.log("Provider check")
+  }
   createAccount(accountType:string,accountName:string, accountBalance: number): firebase.Promise<any> 
   {
     //console logging changes in firebase
@@ -34,7 +36,7 @@ export class BudgetProvider {
         {
           console.log("The read failed: " + errorObject.code);
         });
-
+   
       //the actual push to firebase
       this.userProfileRef.child('accounts').push({
         Account_Type: accountType,
@@ -47,7 +49,7 @@ export class BudgetProvider {
   return 
   }
 
-  createCategory(categoryName:string, categoryBalance: number): firebase.Promise<any> 
+  createCategory(categoryName:string, ): firebase.Promise<any> 
   {
     //console logging changes in firebase
     this.userProfileRef.on("value", function(snapshot) 
@@ -61,7 +63,7 @@ export class BudgetProvider {
       //the actual push to firebase
       this.userProfileRef.child('categories').push({
       CategoryName: categoryName,
-      CategoryBalance: categoryBalance
+      CategoryBalance: 0
       
     })
          
@@ -91,8 +93,7 @@ export class BudgetProvider {
   return 
   }
 
-  addExpense(accountName:string, accountID, categoryName:string, categoryID:string, amount:number){
-    
+  addExpense(accountName:string, accountID, categoryName:string, categoryID:string, amount:any, payee:string, note: string,){
      //console logging changes in firebase
      this.userProfileRef.on("value", function(snapshot) 
      {
@@ -101,25 +102,56 @@ export class BudgetProvider {
        {
          console.log("The read failed: " + errorObject.code);
        });
-
+       let date = new Date();
      //the actual push to firebase
      this.userProfileRef.child('expenses').push({
        AccountName: accountName,
      CategoryName: categoryName,
-     amount: amount
-     
+     amount: amount,
+     payee: payee,
+     note: note,
+     date: date
    })
+   //push expense to individual account
+   this.userProfileRef.child('accounts').child(accountID).child('/expenses').push({
+    AccountName: accountName,
+    CategoryName: categoryName,
+    amount: amount,
+    payee: payee,
+    note: note,
+    date: date
+   });
+   //subtract expense from total balance
    this.userProfileRef.child('accounts').child(accountID).child(`/Accountbalance`).transaction(function(currentbalance) {
-    
     return currentbalance -= amount;
-  });     
-  this.userProfileRef.child('categories').child(categoryID).child(`/CategoryBalance`).transaction(function(currentbalance) {
+  });
+  //push expensne to individual account
+  this.userProfileRef.child('categories').child(categoryID).child('/expenses').push({
+    AccountName: accountName,
+    CategoryName: categoryName,
+    amount: amount,
+    payee: payee,
+    note: note,
+    date: date
+   });
+  //add to "amount" or the amountSpend in that category for the month
+  this.userProfileRef.child('categories').child(categoryID).child(`/CategoryBalance`).transaction( cat => {
+  
+
+   //cat =  parseInt(cat);
+   console.log("CATEGORY BALANCE CHECK1 "+ cat, " ",amount," ", "calculations", cat-amount, cat+amount)
     
-    return currentbalance -= amount;
-  }); 
-   
- return 
-  }
+   cat = Number(cat);
+   cat = Number.parseInt(cat) + Number.parseInt(amount.toString());
+   console.log("CATEGORY BALANCE CHECK2 "+ cat, " ",amount," ", "calculations", cat-amount, cat+amount)
+  
+    return cat;
+  });
+  
+  }//end of add expense
+
+
+  //=======RETURNS FROM FIREBASE=======\\
 
   getAccounts(): firebase.database.Reference {
     return this.userProfileRef.child("/accounts");

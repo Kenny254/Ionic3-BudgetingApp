@@ -8,40 +8,49 @@
 </ion-header>
 
 <ion-content>
- <h1>Balances</h1>
- <ion-item *ngFor="let account of accountList" style="width:100%">
-    <h2>{{account.Name}}</h2>
-    <p>{{account.Type}}</p>
-    <p>
-        <strong>{{account.Balance}}</strong>
-    </p>
-</ion-item>
+  <h1>Balances</h1>
+  <ion-item *ngFor="let account of accountList" style="width:100%">
+      <h2>{{account.Name}}</h2>
+      <p>{{account.Type}}</p>
+      <p>
+      <strong>{{account.Balance}}</strong>
+      </p>
+  </ion-item>
 
-<h1>Categories</h1>
-<ion-item *ngFor="let category of categoryList" >  
-
-    <p>{{category.Name}}</p> 
-    <p>{{category.Balance}}</p> 
-
-</ion-item>
   
- <h1>Expenses (list of recent)</h1>
- <ion-item *ngFor="let expense of expenseList;let i=index" >  
- 
-        <p *ngIf="i<3">{{expense.AccountName}}</p> 
-        <p *ngIf="i<3">{{expense.CategoryName}}</p> 
-        <p *ngIf="i<3">{{expense.amount}}</p>
-        <button ion-button (click)="openExpenseModal()">Add Expense</button>
-    </ion-item>
+  <h1>Upcoming Bills</h1>
+  <ion-item *ngFor="let bill of billsList" style="width:100%">
+      <h2>{{bill.Name}}</h2>
+      <p>
+          <strong>{{bill.Amount}}</strong>
+      </p>
+  </ion-item>
 
-  <h1>Bills</h1>
-    <ion-item *ngFor="let bill of billsList" style="width:100%">
-        <h2>{{bill.Name}}</h2>
-        
-        <p>
-            <strong>{{bill.Amount}}</strong>
-        </p>
-    </ion-item>
-
+  <h1 >Categories(Amount Spent)</h1>
+  <ion-item *ngFor="let category of categoryList" >  
+   
+       <h1>{{category.Name}}</h1> 
+       <h1 *ngIf="category.Balance >= 1">{{category.Balance}}</h1> 
+       <p *ngIf="category.Balance === 0">Nothing has been spent in this category!</p> 
+   
+   </ion-item>
+   
+ <h1>Expenses (last 3)</h1>
+ <div>
+ <ion-item *ngFor="let expense of expenseList;let i=index"  >  
+        <p *ngIf="i<3">Account:{{expense.AccountName}}</p> 
+        <p *ngIf="i<3">Category:{{expense.CategoryName}}</p> 
+        <p *ngIf="i<3">Payee:{{expense.payee}}</p>
+        <p *ngIf="i<3">Memo:{{expense.note}}</p>
+        <p *ngIf="i<3">Amount:{{expense.amount}}</p>
+  </ion-item>
+  </div>
+  <button ion-button (click)="openExpenseModal()">
+    Add Expense
+  </button>
+  <br>
   <button ion-button (click)="logOut();">Log Out</button>
+  
+
+  
 </ion-content>

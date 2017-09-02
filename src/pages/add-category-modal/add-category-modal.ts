@@ -20,7 +20,7 @@ export class AddCategoryModalPage {
     //push a new account to users node
     createCategory(categoryName:string, categoryBalance: number)
     {
-      this.budgetProvider.createCategory(categoryName, categoryBalance);
+      this.budgetProvider.createCategory(categoryName);
       this.dismiss();
     }
 
