@@ -51,8 +51,8 @@ export class AddExpenseModalPage {
         });
   
   }
-  addExpense(Account:string, AccountID:string, Category:string, CategoryID:string, expenseAmount:number){
-    this.budgetProvider.addExpense(Account,AccountID,Category,CategoryID,expenseAmount);
+  addExpense(Account:string, AccountID:string, Category:string, CategoryID:string, expenseAmount:number, expensePayee: string, expenseNote: string){
+    this.budgetProvider.addExpense(Account,AccountID,Category,CategoryID,expenseAmount, expensePayee, expenseNote);
     this.dismiss();
   }
   //close modal

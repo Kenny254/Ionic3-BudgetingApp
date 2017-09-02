@@ -29,12 +29,22 @@
            
           </ion-select>
         </ion-item>
-        
+        <ion-item>
+          <ion-label>Payee</ion-label>
+          <ion-input [(ngModel)]="expensePayee" type="text" placeholder="Wal-Mart">
+          </ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Memo</ion-label>
+          <ion-input [(ngModel)]="expenseNote" type="text" placeholder="Banananzrs, diaperz, malk">
+          </ion-input>
+        </ion-item>
         <ion-item>
             <ion-input [(ngModel)]="expenseAmount" type="number" placeholder="How Much?"></ion-input>
           </ion-item>
 
-          <button ion-button block (click)=" addExpense(Account,Account, Category, Category, expenseAmount);">
+          <button ion-button block (click)=" addExpense(Account,Account, Category, Category, expenseAmount, expensePayee, expenseNote);">
               Add Expense
             </button>
 </ion-content>

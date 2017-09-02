@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams , ModalController} from 'ionic-angular';
 import { BudgetProvider } from './../../providers/budget/budget';
 import { Chart } from 'chart.js';
 
@@ -26,7 +26,7 @@ export class UserCategoriesPage {
   categoryBalance: Array<any>;
   finalNumberArray;
   finalNameArray;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public budgetProvider: BudgetProvider) {
+  constructor(public modalCtrl: ModalController, public navCtrl: NavController, public navParams: NavParams, public budgetProvider: BudgetProvider) {
   }
   
 
@@ -34,6 +34,10 @@ export class UserCategoriesPage {
    
    
   
+  }
+  openCategoryModalWithParams() {
+    let myModal = this.modalCtrl.create('AddCategoryModalPage');
+    myModal.present();
   }
   //charts
   //example charts for now 

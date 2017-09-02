@@ -33,6 +33,7 @@ export class HomePage {
         return false
       });
       });
+      //categories
       this.budgetProvider.getCategories().on('value', snapshot => {
         this.categoryList = [];
         snapshot.forEach( snap => {
@@ -49,6 +50,7 @@ export class HomePage {
           return false
         });
         });
+        //expenses
         this.budgetProvider.getExpenses().on('value', snapshot => {
           this.expenseList = [];
           snapshot.forEach( snap => {
@@ -57,13 +59,16 @@ export class HomePage {
            
               AccountName: snap.val().AccountName,
               CategoryName: snap.val().CategoryName,
-              amount: snap.val().amount
+              amount: snap.val().amount,
+              payee: snap.val().payee,
+              note: snap.val().note
          
             });
             console.log(this.expenseList);
             return false
           });
           });
+          //bills
           this.budgetProvider.getBills().on('value', snapshot => {
             this.billsList = [];
             snapshot.forEach( snap => {
