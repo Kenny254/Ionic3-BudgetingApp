@@ -4,6 +4,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AngularFireAuth } from 'angularfire2/auth';  
 import { HomePage } from '../pages/home/home';
+import { Keyboard } from '@ionic-native/keyboard';
 @Component({
   templateUrl: 'app.html'
 })
@@ -11,7 +12,7 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
   rootPage: any = 'LoginPage';
   pages: Array<{title: string, component: any}>;
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public afAuth: AngularFireAuth) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public afAuth: AngularFireAuth, private keyboard: Keyboard) {
     this.initializeApp();
     // used for side menu
     this.pages = [
@@ -38,6 +39,7 @@ export class MyApp {
       });
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      this.keyboard.disableScroll(false);
     });
   }
 

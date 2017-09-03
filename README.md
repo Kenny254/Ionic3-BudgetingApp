@@ -13,7 +13,8 @@ ionic cordova plugin add de.appplant.cordova.plugin.local-notification
 npm install --save @ionic-native/local-notifications
 npm install moment --save
 npm install promise-polyfill --save-exact
-
+ionic cordova plugin add ionic-plugin-keyboard
+npm install --save @ionic-native/keyboard
 for notifications see
 https://github.com/katzer/cordova-plugin-local-notifications/issues/1344
 
