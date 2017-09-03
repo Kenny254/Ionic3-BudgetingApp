@@ -1,12 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { BudgetProvider } from './../../providers/budget/budget';
-/**
- * Generated class for the UserExpensesPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -24,12 +18,10 @@ export class UserExpensesPage {
       this.expenseList = [];
       snapshot.forEach( snap => {
         this.expenseList.push({
-          id: snap.key,
-       
+          id: snap.key,      
           AccountName: snap.val().AccountName,
           CategoryName: snap.val().CategoryName,
-          amount: snap.val().amount
-     
+          amount: snap.val().amount    
         });
         console.log(this.expenseList);
         return false

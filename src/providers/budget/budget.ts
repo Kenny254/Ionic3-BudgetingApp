@@ -3,12 +3,6 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import firebase from 'firebase';
 import 'rxjs/add/operator/map';
 
-/*
-  Generated class for the BudgetProvider provider.
-
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular DI.
-*/
 @Injectable()
 export class BudgetProvider {
   public UID: string;
@@ -23,9 +17,11 @@ export class BudgetProvider {
       }
     });
   }//end of constructor
+
   ionViewDidLoad(){
    console.log("Provider check")
   }
+
   createAccount(accountType:string,accountName:string, accountBalance: number): firebase.Promise<any> 
   {
     //console logging changes in firebase
@@ -36,16 +32,12 @@ export class BudgetProvider {
         {
           console.log("The read failed: " + errorObject.code);
         });
-   
       //the actual push to firebase
       this.userProfileRef.child('accounts').push({
         Account_Type: accountType,
         Accountname: accountName,
-        Accountbalance: accountBalance
-      
-    })
-         
-    
+        Accountbalance: accountBalance      
+    })             
   return 
   }
 
@@ -59,19 +51,15 @@ export class BudgetProvider {
         {
           console.log("The read failed: " + errorObject.code);
         });
-
       //the actual push to firebase
       this.userProfileRef.child('categories').push({
       CategoryName: categoryName,
-      CategoryBalance: 0
-      
-    })
-         
-    
+      CategoryBalance: 0     
+    })             
   return 
   }
 
-  createBill(billName:string, billAmount: number): firebase.Promise<any> 
+  createBill(billName:string, billAmount: number, billDate:any): firebase.Promise<any> 
   {
     //console logging changes in firebase
     this.userProfileRef.on("value", function(snapshot) 
@@ -81,15 +69,12 @@ export class BudgetProvider {
         {
           console.log("The read failed: " + errorObject.code);
         });
-
       //the actual push to firebase
       this.userProfileRef.child('bills').push({
         billName: billName,
-        billAmount: billAmount
-      
-    })
-         
-    
+        billAmount: billAmount,
+        billDate: billDate      
+    })             
   return 
   }
 
@@ -105,12 +90,12 @@ export class BudgetProvider {
        let date = new Date();
      //the actual push to firebase
      this.userProfileRef.child('expenses').push({
-       AccountName: accountName,
-     CategoryName: categoryName,
-     amount: amount,
-     payee: payee,
-     note: note,
-     date: date
+      AccountName: accountName,
+      CategoryName: categoryName,
+      amount: amount,
+      payee: payee,
+      note: note,
+      date: date
    })
    //push expense to individual account
    this.userProfileRef.child('accounts').child(accountID).child('/expenses').push({
@@ -135,21 +120,15 @@ export class BudgetProvider {
     date: date
    });
   //add to "amount" or the amountSpend in that category for the month
-  this.userProfileRef.child('categories').child(categoryID).child(`/CategoryBalance`).transaction( cat => {
-  
-
+  this.userProfileRef.child('categories').child(categoryID).child(`/CategoryBalance`).transaction( cat => { 
    //cat =  parseInt(cat);
-   console.log("CATEGORY BALANCE CHECK1 "+ cat, " ",amount," ", "calculations", cat-amount, cat+amount)
-    
+   console.log("CATEGORY BALANCE CHECK1 "+ cat, " ",amount," ", "calculations", cat-amount, cat+amount)    
    cat = Number(cat);
    cat = Number.parseInt(cat) + Number.parseInt(amount.toString());
-   console.log("CATEGORY BALANCE CHECK2 "+ cat, " ",amount," ", "calculations", cat-amount, cat+amount)
-  
+   console.log("CATEGORY BALANCE CHECK2 "+ cat, " ",amount," ", "calculations", cat-amount, cat+amount)  
     return cat;
-  });
-  
+  });  
   }//end of add expense
-
 
   //=======RETURNS FROM FIREBASE=======\\
 

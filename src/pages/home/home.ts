@@ -14,8 +14,8 @@ export class HomePage {
   public expenseList: Array<any>;
   public billsList: Array<any>;
   constructor(public modalCtrl: ModalController,public navCtrl: NavController, public budgetProvider:BudgetProvider, public userProvider: UserProvider) {
-
   }
+  
   ionViewDidEnter() 
   {
     console.log('ionViewDidLoad JobsPage');
@@ -38,13 +38,9 @@ export class HomePage {
         this.categoryList = [];
         snapshot.forEach( snap => {
           this.categoryList.push({
-            id: snap.key,
-         
+            id: snap.key,         
             Name: snap.val().CategoryName,
-
-            Balance: snap.val().CategoryBalance,
-
-       
+            Balance: snap.val().CategoryBalance,      
           });
           console.log(this.categoryList);
           return false
@@ -55,14 +51,12 @@ export class HomePage {
           this.expenseList = [];
           snapshot.forEach( snap => {
             this.expenseList.push({
-              id: snap.key,
-           
+              id: snap.key,           
               AccountName: snap.val().AccountName,
               CategoryName: snap.val().CategoryName,
               amount: snap.val().amount,
               payee: snap.val().payee,
-              note: snap.val().note
-         
+              note: snap.val().note         
             });
             console.log(this.expenseList);
             return false
@@ -74,15 +68,16 @@ export class HomePage {
             snapshot.forEach( snap => {
               this.billsList.push({
                 id: snap.key,
-              Name: snap.val().billName,
+                Name: snap.val().billName,
                 Amount: snap.val().billAmount,
-              
+                DueDate: snap.val().billDate
               });
               console.log("Bills"+this.billsList,"Accounts"+ this.accountList,"Categories"+ this.categoryList);
               return false
             });
             });
   }
+
   openExpenseModal() {
     let myModal = this.modalCtrl.create('AddExpenseModalPage');
     myModal.present();
@@ -90,6 +85,5 @@ export class HomePage {
 
   logOut(){
     this.userProvider.logoutUser().then( () => this.navCtrl.setRoot('LoginPage'));
-    
   }
 }

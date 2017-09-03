@@ -36,31 +36,24 @@ export class InitUserPage {
         return false
       });
       });
-
       this.budgetProvider.getCategories().on('value', snapshot => {
         this.categoryList = [];
         snapshot.forEach( snap => {
           this.categoryList.push({
-            id: snap.key,
-         
+            id: snap.key,         
             Name: snap.val().CategoryName,
-            Balance: snap.val().CategoryBalance
-       
+            Balance: snap.val().CategoryBalance      
           });
           console.log(this.categoryList);
           return false
         });
         });
-
   }
-
-
- 
-
   openModalWithParams() {
     let myModal = this.modalCtrl.create('AddAccountModalPage', { 'myParam': this.myParam });
     myModal.present();
   }
+  
   openCategoryModalWithParams() {
     let myModal = this.modalCtrl.create('AddCategoryModalPage');
     myModal.present();

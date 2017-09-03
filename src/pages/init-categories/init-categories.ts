@@ -5,7 +5,6 @@ import {BudgetProvider} from '../../providers/budget/budget';
 import {AddAccountModalPage } from '../add-account-modal/add-account-modal';
 import {HomePage} from '../home/home';
 import { UserProvider } from '../../providers/user/user';
-
 @IonicPage()
 @Component({
   selector: 'page-init-categories',
@@ -24,21 +23,17 @@ export class InitCategoriesPage {
         this.categoryList = [];
         snapshot.forEach( snap => {
           this.categoryList.push({
-            id: snap.key,
-         
+            id: snap.key,        
             Name: snap.val().CategoryName,
             Balance: snap.val().CategoryBalance
-       
           });
           console.log(this.categoryList);
           return false
         });
         });
-
   }
   
-  createCategory(categoryName: string,)
-  {
+  createCategory(categoryName: string,){
     this.budgetProvider.createCategory(categoryName);
   }
 

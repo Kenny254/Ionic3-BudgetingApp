@@ -1,13 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import {BudgetProvider} from '../../providers/budget/budget';
-/**
- * Generated class for the AddBillModalPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-add-bill-modal',
@@ -15,18 +8,14 @@ import {BudgetProvider} from '../../providers/budget/budget';
 })
 export class AddBillModalPage {
   myParam: string;
-  constructor(
-    public viewCtrl: ViewController,
-    params: NavParams,
-    public budgetProvider: BudgetProvider
-  ) {
+  constructor(public viewCtrl: ViewController,params: NavParams,public budgetProvider: BudgetProvider) {
     //constructor
     this.myParam = params.get('myParam');
   }
-  //push a new account to users node
-  createBill(billname:string, billamount:number )
-  {
-    this.budgetProvider.createBill(billname,billamount);
+
+  //push a new bill to user node
+  createBill(billname:string, billamount:number, billDate:any ){
+    this.budgetProvider.createBill(billname,billamount,billDate);
     this.dismiss();
   }
 

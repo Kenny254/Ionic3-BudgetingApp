@@ -52,7 +52,6 @@ export class UserProvider {
     if (typeof pay !== 'undefined') {
       // the variable is defined
     }
-   
     //console logging changes in firebase
     this.userProfileRef.on("value", function(snapshot) 
       {
@@ -61,24 +60,15 @@ export class UserProvider {
         {
           console.log("The read failed: " + errorObject.code);
         });
-
       //the actual push to firebase
       this.userProfileRef.child('userinfo').update({
-       Pay: pay,
-      
-      
+       Pay: pay,  
     })
-         
-    
   return 
   }
 
   logoutUser(): firebase.Promise<any> {
     return this.afireauth.auth.signOut()
-    
   }
-
-
-
 
 }

@@ -28,13 +28,7 @@ export class UserCategoriesPage {
   finalNameArray;
   constructor(public modalCtrl: ModalController, public navCtrl: NavController, public navParams: NavParams, public budgetProvider: BudgetProvider) {
   }
-  
 
-  ionViewDidEnter() {
-   
-   
-  
-  }
   openCategoryModalWithParams() {
     let myModal = this.modalCtrl.create('AddCategoryModalPage');
     myModal.present();
@@ -47,19 +41,14 @@ export class UserCategoriesPage {
       this.categoryList = [];
       snapshot.forEach( snap => {
         this.categoryList.push({
-          id: snap.key,
-       
+          id: snap.key,   
           Name: snap.val().CategoryName,
-
           Balance: snap.val().CategoryBalance,
-
-     
         });
         console.log('categorylist follows');
         console.log(this.categoryList);
         this.finalNameArray = this.categoryList.map(function (obj) {
             return obj.Name;
-            
           });
           this.finalNumberArray = this.categoryList.map(function (obj) {
             return Number(obj.Balance);
@@ -77,22 +66,17 @@ export class UserCategoriesPage {
         snapshot.forEach( snap => {
           this.categoryBalance.push({
             id: snap.key,
-         
-            Name: snap.val().CategoryName,
-  
-            Balance: snap.val().CategoryBalance,
-  
-       
+            Name: snap.val().CategoryName, 
+            Balance: snap.val().CategoryBalance,   
           });
           console.log('categoryBalance follows');
-          console.log( this.categoryBalance);
-     
+          console.log( this.categoryBalance);    
           return false
         });
         });
    //this.categoryBalance.map(Number);
  this.barChart = new Chart(this.barCanvas.nativeElement, {
-    
+   
                type: 'bar',
                data: {
                    labels: this.finalNameArray,

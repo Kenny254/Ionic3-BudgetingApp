@@ -1,18 +1,11 @@
-<!--
-  Generated template for the BillsPage page.
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
   <ion-navbar>
       <button ion-button menuToggle>
           <ion-icon name="menu"></ion-icon>
         </button>
     <ion-title>Bills</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
@@ -20,10 +13,8 @@
     <h1>Bills</h1>
     <ion-item *ngFor="let bill of billsList" style="width:100%">
         <h2>{{bill.Name}}</h2>
-        
-        <p>
-            <strong>{{bill.Amount}}</strong>
-        </p>
+        <p> <strong>{{bill.Amount}}</strong></p>
+        <p> {{bill.DueDate}}</p>
     </ion-item>
-    <button ion-button name="add" style="font-size: 3em;" (click)="openModalWithParams()">Add Bill</button>
+    <button ion-button  (click)="openModalWithParams()">Add Bill</button>
 </ion-content>

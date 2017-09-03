@@ -53,42 +53,38 @@ export class AddUserInfoPage {
       console.log("entering page")
       //snapping public list values
       this.budgetProvider.getAccounts().on('value', snapshot => {
+          //accounts
         this.accountList = [];
         snapshot.forEach( snap => {
           this.accountList.push({
             id: snap.key,
-           Type: snap.val().Account_Type,
+            Type: snap.val().Account_Type,
             Name: snap.val().Accountname,
-           Balance: snap.val().Accountbalance
+            Balance: snap.val().Accountbalance
           });
-         
           return false
         });
         });
-  
+        //categories
         this.budgetProvider.getCategories().on('value', snapshot => {
           this.categoryList = [];
           snapshot.forEach( snap => {
             this.categoryList.push({
               id: snap.key,
-           
               Name: snap.val().CategoryName,
               Balance: snap.val().CategoryBalance
-         
             });
-           
             return false
           });
           });
-
+          //bills
           this.budgetProvider.getBills().on('value', snapshot => {
             this.billsList = [];
             snapshot.forEach( snap => {
               this.billsList.push({
                 id: snap.key,
-              Name: snap.val().billName,
+                Name: snap.val().billName,
                 Amount: snap.val().billAmount,
-              
               });
               console.log("Bills"+this.billsList,"Accounts"+ this.accountList,"Categories"+ this.categoryList);
               return false
@@ -102,14 +98,16 @@ export class AddUserInfoPage {
 
   addProfileInfo(pay:number){
     this.userProvider.createProfile(pay);
-    
   }
 
-  createAccount(accountType:string,accountName: string, accountBalance: number)
-  {
+  createAccount(accountType:string,accountName: string, accountBalance: number){
     this.budgetProvider.createAccount(accountType,accountName, accountBalance);
   }
 
+  gotoHome(){
+    this.navCtrl.setRoot(HomePage)
+  }
+  //Modals
   openModalWithParams() {
     let myModal = this.modalCtrl.create('AddAccountModalPage', { 'myParam': this.myParam });
     myModal.present();
@@ -123,17 +121,13 @@ export class AddUserInfoPage {
     myModal.present();
   }
 
-  
-  gotoHome(){
-    this.navCtrl.setRoot(HomePage)
-  }
-  /*NOTIF AND TIME LOGGING */
-  timeChange(time){
+  /*NOTIF AND TIME LOGGING CURRENTLY CAUSES CRASH-UNUSED*/
+timeChange(time){
     this.chosenHours = time.hour.value;
     this.chosenMinutes = time.minute.value;
   }
 
- addpayNotifications(payperiod:string){
+addpayNotifications(payperiod:string){
   let currentDate = new Date();
   let currentDay = currentDate.getDay(); // Sunday = 0, Monday = 1, etc.
   for(let day of this.days){
@@ -292,6 +286,5 @@ addphoneNotifications(){
       });
   }
 }
-
 
 }
