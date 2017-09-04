@@ -17,17 +17,13 @@
         <p *ngIf="category.Balance === 0">Nothing has been spent in this category!</p>    
     </ion-item>
     <button ion-button  (click)="openCategoryModalWithParams()">Add Category</button>
-    <ion-card>        
-        <ion-card-content>
-          <canvas #barCanvas></canvas>
-        </ion-card-content>
-      </ion-card>
    
-      <ion-card>        
-        <ion-card-content>
-          <canvas #doughnutCanvas></canvas>
-        </ion-card-content>
-      </ion-card>
+          <canvas #barCanvas  id="graph" ></canvas>
+ 
+   
+  
+          <canvas #doughnutCanvas  id="graph" ></canvas>
+  
    
       <!--TODO--GRAPH OVER TIME
         <ion-card>        

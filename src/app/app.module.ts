@@ -9,7 +9,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import 'rxjs/add/observable/fromPromise'
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
- 
+import { Keyboard } from '@ionic-native/keyboard';
 //charting
 import {ChartsModule} from 'ng2-charts/charts/charts';
 import '../../node_modules/chart.js/dist/Chart.bundle.min.js';
@@ -48,6 +48,7 @@ import { UserProvider } from '../providers/user/user';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     LocalNotifications,
+    Keyboard,
     //af2
     AngularFireAuth,
     //ourproviders

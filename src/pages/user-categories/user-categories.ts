@@ -99,10 +99,11 @@ export class UserCategoriesPage {
                            'rgba(153, 102, 255, 1)',
                            'rgba(255, 159, 64, 1)'
                        ],
-                       borderWidth: 1
+                       borderWidth: 0.3
                    }]
                },
-               options: {
+               options: {  responsive: false,
+              
                    scales: {
                        yAxes: [{
                            ticks: {
@@ -114,34 +115,30 @@ export class UserCategoriesPage {
     
            });
     
-           this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
-    
-               type: 'doughnut',
-               data: {
-                   labels: this.finalNameArray,
-                   datasets: [{
-                       label: 'Spending Chart 2',
-                       data: this.finalNumberArray,
-                       backgroundColor: [
-                           'rgba(255, 99, 132, 0.2)',
-                           'rgba(54, 162, 235, 0.2)',
-                           'rgba(255, 206, 86, 0.2)',
-                           'rgba(75, 192, 192, 0.2)',
-                           'rgba(153, 102, 255, 0.2)',
-                           'rgba(255, 159, 64, 0.2)'
-                       ],
-                       hoverBackgroundColor: [
-                           "#FF6384",
-                           "#36A2EB",
-                           "#FFCE56",
-                           "#FF6384",
-                           "#36A2EB",
-                           "#FFCE56"
-                       ]
-                   }]
-               }
-    
-           });
+         
+            this.doughnutChart= new Chart(this.doughnutCanvas.nativeElement, {
+                type: 'horizontalBar',
+                data: {
+                    labels: this.finalNameArray,
+                    datasets: [{
+                        label: 'Spending Chart 2',
+                        data: this.finalNumberArray,
+                    }]
+                },
+                options: {  responsive: false,
+               
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero:true
+                            }
+                        }]
+                    }
+                }
+     
+            });
+     
+              
     
         //    this.lineChart = new Chart(this.lineCanvas.nativeElement, {
     
