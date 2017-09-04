@@ -42,7 +42,9 @@ export class AddExpenseModalPage {
   }
 
   addExpense(Account:string, AccountID:string, Category:string, CategoryID:string, expenseAmount:number, expensePayee: string, expenseNote: string){
-    this.budgetProvider.addExpense(Account,AccountID,Category,CategoryID,expenseAmount, expensePayee, expenseNote);
+    let date = new Date();
+    console.log(date);
+    this.budgetProvider.addExpense(Account,AccountID,Category,CategoryID,expenseAmount, expensePayee, expenseNote, date);
     this.dismiss();
   }
   //close modal

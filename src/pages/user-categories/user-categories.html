@@ -17,12 +17,14 @@
         <p *ngIf="category.Balance === 0">Nothing has been spent in this category!</p>    
     </ion-item>
     <button ion-button  (click)="openCategoryModalWithParams()">Add Category</button>
+   <!-- graph height/width must be in set in html, therefor we need to put it in a div to apply platform specific css changes -->
+
+  <div>
    
-          <canvas #barCanvas  id="graph" ></canvas>
- 
-   
+          <canvas #barCanvas  id="graph" width="300" height="300"></canvas>
+        </div>
   
-          <canvas #doughnutCanvas  id="graph" ></canvas>
+          <canvas #doughnutCanvas  id="graph" width="300" height="300" ></canvas>
   
    
       <!--TODO--GRAPH OVER TIME
@@ -31,4 +33,6 @@
           <canvas #lineCanvas></canvas>
         </ion-card-content>
       </ion-card> -->
+  
+ 
 </ion-content>

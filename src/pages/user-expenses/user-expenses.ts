@@ -18,10 +18,13 @@ export class UserExpensesPage {
       this.expenseList = [];
       snapshot.forEach( snap => {
         this.expenseList.push({
-          id: snap.key,      
+          id: snap.key,           
           AccountName: snap.val().AccountName,
           CategoryName: snap.val().CategoryName,
-          amount: snap.val().amount    
+          amount: snap.val().amount,
+          payee: snap.val().payee,
+          note: snap.val().note,
+          date: snap.val().date   
         });
         console.log(this.expenseList);
         return false

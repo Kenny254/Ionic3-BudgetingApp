@@ -1,10 +1,9 @@
 page-user-categories {
     platform-browser{
- 
+       
     
     .ios, .md {
-        
-
+   
         
                .scroll-content {
                    background-color: map-get($colors, light);
@@ -13,10 +12,10 @@ page-user-categories {
                ion-card-header {
                    font-weight: bold;
                }
-               #graph{
-                    background-color:#000000;
-               }
-        
+           
+           
+             
+              
            }
         
        }

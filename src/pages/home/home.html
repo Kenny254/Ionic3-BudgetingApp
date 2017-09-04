@@ -37,12 +37,13 @@
 
   <h1>Expenses (last 3)</h1>
   <div>
-    <ion-item *ngFor="let expense of expenseList;let i=index"  >  
-      <p *ngIf="i<3">Account:{{expense.AccountName}}</p> 
-      <p *ngIf="i<3">Category:{{expense.CategoryName}}</p> 
-      <p *ngIf="i<3">Payee:{{expense.payee}}</p>
-      <p *ngIf="i<3">Memo:{{expense.note}}</p>
-      <p *ngIf="i<3">Amount:{{expense.amount}}</p>
+    <ion-item *ngFor="let expense of expenseList;let i=index;"  >  
+      <p>Account:{{expense.AccountName}}</p> 
+      <p>Category:{{expense.CategoryName}}</p> 
+      <p>Payee:{{expense.payee}}</p>
+      <p>Memo:{{expense.note}}</p>
+      <p>Amount:{{expense.amount}}</p>
+      <p>Date:{{expense.date}}</p>
     </ion-item>
   </div>
 

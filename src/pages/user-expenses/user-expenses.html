@@ -11,9 +11,12 @@
 <ion-content >
     <h1>Expenses (list of recent)</h1>
     <ion-item *ngFor="let expense of expenseList;let i=index" >      
-           <p >{{expense.AccountName}}</p> 
-           <p >{{expense.CategoryName}}</p> 
-           <p >{{expense.amount}}</p>   
+        <p *ngIf="i<5">Account:{{expense.AccountName}}</p> 
+        <p *ngIf="i<5">Category:{{expense.CategoryName}}</p> 
+        <p *ngIf="i<5">Payee:{{expense.payee}}</p>
+        <p *ngIf="i<5">Memo:{{expense.note}}</p>
+        <p *ngIf="i<5">Amount:{{expense.amount}}</p>
+        <p *ngIf="i<5">Date:{{expense.date}}</p>
     </ion-item>
     <button ion-button (click)="openExpenseModal()">
           Add Expense

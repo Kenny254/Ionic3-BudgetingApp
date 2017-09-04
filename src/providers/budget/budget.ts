@@ -6,6 +6,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class BudgetProvider {
   public UID: string;
+  date;
   userProfileRef: firebase.database.Reference;
   firedata = firebase.database().ref('/users');
   constructor(public afireauth: AngularFireAuth) {
@@ -20,6 +21,7 @@ export class BudgetProvider {
 
   ionViewDidLoad(){
    console.log("Provider check")
+  
   }
 
   createAccount(accountType:string,accountName:string, accountBalance: number): firebase.Promise<any> 
@@ -78,7 +80,7 @@ export class BudgetProvider {
   return 
   }
 
-  addExpense(accountName:string, accountID, categoryName:string, categoryID:string, amount:any, payee:string, note: string,){
+  addExpense(accountName:string, accountID, categoryName:string, categoryID:string, amount:any, payee:string, note: string, date: Date){
      //console logging changes in firebase
      this.userProfileRef.on("value", function(snapshot) 
      {
@@ -87,7 +89,7 @@ export class BudgetProvider {
        {
          console.log("The read failed: " + errorObject.code);
        });
-       let date = new Date();
+ 
      //the actual push to firebase
      this.userProfileRef.child('expenses').push({
       AccountName: accountName,
@@ -95,7 +97,7 @@ export class BudgetProvider {
       amount: amount,
       payee: payee,
       note: note,
-      date: date
+      date: Date()
    })
    //push expense to individual account
    this.userProfileRef.child('accounts').child(accountID).child('/expenses').push({
@@ -104,7 +106,7 @@ export class BudgetProvider {
     amount: amount,
     payee: payee,
     note: note,
-    date: date
+    date: Date()
    });
    //subtract expense from total balance
    this.userProfileRef.child('accounts').child(accountID).child(`/Accountbalance`).transaction(function(currentbalance) {
@@ -117,7 +119,7 @@ export class BudgetProvider {
     amount: amount,
     payee: payee,
     note: note,
-    date: date
+    date:  Date()
    });
   //add to "amount" or the amountSpend in that category for the month
   this.userProfileRef.child('categories').child(categoryID).child(`/CategoryBalance`).transaction( cat => { 

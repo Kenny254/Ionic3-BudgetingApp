@@ -56,7 +56,8 @@ export class HomePage {
               CategoryName: snap.val().CategoryName,
               amount: snap.val().amount,
               payee: snap.val().payee,
-              note: snap.val().note         
+              note: snap.val().note,
+              date: snap.val().date         
             });
             console.log(this.expenseList);
             return false
